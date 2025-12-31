@@ -363,7 +363,7 @@
                                         @foreach($column['links'] ?? [] as $link)
                                             <li>
                                                 <a href="{{ $link['url'] ?? '#' }}" 
-                                                   data-image="{{ asset('images/home/super_hero_bg.webp') }}" 
+                                                   data-image="{{ !empty($link['image']) ? parse_url(asset($link['image']), PHP_URL_PATH) : parse_url(asset('images/home/super_hero_bg.webp'), PHP_URL_PATH) }}" 
                                                    data-caption="{{ $link['caption'] ?? '' }}">
                                                     {{ $link['label'] ?? 'Link' }}
                                                 </a>
@@ -377,7 +377,11 @@
                         {{-- Render Featured Spotlight (First one found takes precedence for layout) --}}
                         @if(!empty($item['featured_image']))
                             <div class="mega-menu-image-col">
-                                <img src="{{ \Illuminate\Support\Facades\Storage::url($item['featured_image']) }}" alt="{{ $item['featured_title'] ?? 'Featured' }}" class="mega-feat-img">
+                                @php
+                                    $featImageUrl = asset($item['featured_image']);
+                                    $featImagePath = parse_url($featImageUrl, PHP_URL_PATH);
+                                @endphp
+                                <img src="{{ $featImagePath }}" alt="{{ $item['featured_title'] ?? 'Featured' }}" class="mega-feat-img">
                                 <div class="mega-feat-content">
                                     <h5>{{ $item['featured_title'] ?? '' }}</h5>
                                     <p>{{ $item['featured_description'] ?? '' }}</p>

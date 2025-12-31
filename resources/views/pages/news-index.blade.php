@@ -482,7 +482,18 @@
             @if ($featuredPost)
                 @php
                     $featuredImageUrl = $featuredPost->getFirstMediaUrl('thumbnail');
-                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : '';
+                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : null;
+
+                    if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
+                        $slugMap = [
+                            'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
+                            'order-status-guide' => 'images/news/flat/order-status.png',
+                            'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
+                            'community-guidelines' => 'images/news/flat/community.png',
+                        ];
+                        $staticPath = $slugMap[$featuredPost->slug] ?? 'images/home/super_hero_bg.webp';
+                        $featuredImagePath = '/' . $staticPath;
+                    }
                 @endphp
                 <a href="{{ route('news.show', $featuredPost->slug) }}" wire:navigate class="featured-post">
                     <div class="featured-post-image" @if ($featuredImagePath) style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;" @endif>
@@ -518,7 +529,19 @@
             @forelse ($posts as $post)
                 @php
                     $postImageUrl = $post->getFirstMediaUrl('thumbnail');
-                    $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : '';
+                    $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : null;
+                    
+                    if (!$postImagePath || !file_exists(public_path(urldecode($postImagePath)))) {
+                         $slugMap = [
+                            'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
+                            'order-status-guide' => 'images/news/flat/order-status.png',
+                            'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
+                            'community-guidelines' => 'images/news/flat/community.png',
+                        ];
+                        $staticPath = $slugMap[$post->slug] ?? 'images/home/super_hero_bg.webp';
+                        $postImagePath = '/' . $staticPath;
+                    }
+
                     $content = strip_tags($post->getRawOriginal('content') ?? $post->content ?? '');
                     $readMinutes = max(1, (int) ceil(str_word_count($content) / 200));
                 @endphp

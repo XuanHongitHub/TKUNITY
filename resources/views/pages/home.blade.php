@@ -1101,11 +1101,20 @@
         <div class="news-grid">
             @if ($featuredPost)
                 @php
-                    $featuredImage = $featuredPost->getFirstMediaUrl('thumbnail');
-                @endphp
-                @php
                     $featuredImageUrl = $featuredPost->getFirstMediaUrl('thumbnail');
-                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : asset('images/home/super_hero_bg.webp');
+                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : null;
+                    
+                    // Fallback logic: 1. DB Media -> 2. Static Flat Image (by slug) -> 3. Generic Placeholder
+                    if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
+                        $slugMap = [
+                            'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
+                            'order-status-guide' => 'images/news/flat/order-status.png',
+                            'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
+                            'community-guidelines' => 'images/news/flat/community.png',
+                        ];
+                        $staticPath = $slugMap[$featuredPost->slug] ?? 'images/home/super_hero_bg.webp';
+                        $featuredImagePath = '/' . $staticPath; // Ensure leading slash for CSS url()
+                    }
                 @endphp
                 <a href="{{ route('news.show', $featuredPost->slug) }}" wire:navigate class="news-featured">
                     <div class="news-featured-image" style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;">
@@ -1142,7 +1151,18 @@
                 @foreach ($latestPosts as $post)
                     @php
                         $postImageUrl = $post->getFirstMediaUrl('thumbnail');
-                        $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : asset('images/home/super_hero_bg.webp');
+                        $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : null;
+
+                        if (!$postImagePath || !file_exists(public_path(urldecode($postImagePath)))) {
+                            $slugMap = [
+                                'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
+                                'order-status-guide' => 'images/news/flat/order-status.png',
+                                'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
+                                'community-guidelines' => 'images/news/flat/community.png',
+                            ];
+                            $staticPath = $slugMap[$post->slug] ?? 'images/home/super_hero_bg.webp';
+                            $postImagePath = '/' . $staticPath;
+                        }
                     @endphp
                     <a href="{{ route('news.show', $post->slug) }}" wire:navigate class="news-card-small">
                         <div class="news-card-small-image" style="background-image: url('{{ $postImagePath }}'); background-size: cover; background-position: center;">
@@ -1515,21 +1535,23 @@
 @section('scripts')
 <script>
     // FAQ Accordion
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            const faqItem = question.parentElement;
-            const isActive = faqItem.classList.contains('active');
+    (function() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
 
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
             });
-
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
         });
-    });
+    })();
 
     // Games Slider
     (function () {
