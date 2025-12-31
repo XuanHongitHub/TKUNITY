@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TKUNITY Light | Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #6b6b6b;
+      --accent: #1f5f4f;
+      --accent-2: #ffb46a;
+      --line: #e7e1d6;
+      --shadow: 0 20px 38px rgba(28, 28, 28, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, rgba(31, 95, 79, 0.08), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255, 180, 106, 0.2), transparent 55%),
+        var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 16px;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      padding: 36px 0 56px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      margin: 0 0 0.6rem;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(31, 95, 79, 0.12);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--accent-2);
+      color: #3c2600;
+      box-shadow: var(--shadow);
+    }
+
+    .btn-ghost {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: transparent;
+    }
+
+    .footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .reveal {
+      animation: rise 0.9s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-3,
+      .grid-2,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav container">
+      <a class="logo" href="index.html">TKUNITY</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a class="nav-cta" href="contact.html">Say hello</a>
+    </nav>
+    <section class="hero container reveal">
+      <div>
+        <span class="eyebrow">Light studio</span>
+        <h1>Gentle worlds that invite teams to learn together.</h1>
+        <p>
+          TKUNITY Light is a playful studio approach focused on warm narratives,
+          approachable mechanics, and learning journeys that feel human.
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="services.html">Explore services</a>
+          <a class="btn btn-ghost" href="about.html">Our story</a>
+        </div>
+      </div>
+      <div class="hero-card reveal delay-1">
+        <span class="pill">Community minded</span>
+        <h3>Designed for connection</h3>
+        <p>Every experience includes co-op moments, reflective breaks, and shared feedback.</p>
+        <div class="list">
+          <div>Co-design workshops</div>
+          <div>Regular creative reviews</div>
+          <div>Inclusive playtests</div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section container reveal">
+      <span class="eyebrow">Services</span>
+      <h2>Studio support across the journey.</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Discovery labs</h3>
+          <p>Facilitated sessions to align goals and build trust.</p>
+        </div>
+        <div class="card">
+          <h3>Prototype sprints</h3>
+          <p>Small, fast builds to test ideas in real play.</p>
+        </div>
+        <div class="card">
+          <h3>Launch support</h3>
+          <p>Guides, onboarding flows, and feedback loops.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container reveal">
+      <span class="eyebrow">Approach</span>
+      <h2>Gentle structure with clear steps.</h2>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Co-creation</h3>
+          <p>Workshops that align tone, language, and goals.</p>
+        </div>
+        <div class="card">
+          <h3>Prototype and learn</h3>
+          <p>Small builds tested with guided feedback sessions.</p>
+        </div>
+        <div class="card">
+          <h3>Refine and deliver</h3>
+          <p>Polish, documentation, and handoff support.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container reveal delay-1">
+      <span class="eyebrow">Featured experiences</span>
+      <h2>Soft worlds with strong learning goals.</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Co-op planning practice</h3>
+          <p>Shared tasks centered on planning, timing, and reflection.</p>
+        </div>
+        <div class="card">
+          <h3>Reflective narrative module</h3>
+          <p>Story-led practice on resilience and team communication.</p>
+        </div>
+        <div class="card">
+          <h3>Exploration practice</h3>
+          <p>Gentle pacing with shared goals and guided exploration.</p>
+        </div>
+        <div class="card">
+          <h3>Facilitation toolkit</h3>
+          <p>Guides and prompts for running sessions with care.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container reveal">
+      <span class="eyebrow">Review focus</span>
+      <h2>Simple checks for clarity and comfort.</h2>
+      <div class="grid-2">
+        <div class="card">
+          <h3>Readability</h3>
+          <p>Typography, contrast, and layout are reviewed for ease of use.</p>
+        </div>
+        <div class="card">
+          <h3>Tone and language</h3>
+          <p>Content is kept calm, respectful, and consistent.</p>
+        </div>
+        <div class="card">
+          <h3>Navigation</h3>
+          <p>Clear flows and feedback to support confident progress.</p>
+        </div>
+        <div class="card">
+          <h3>Documentation</h3>
+          <p>Notes and changes are captured for review.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container reveal delay-2">
+      <div class="card">
+        <span class="eyebrow">Start a conversation</span>
+        <h2>Plan a light-touch pilot with us.</h2>
+        <p>We will shape a calm, purposeful experience that fits your team culture.</p>
+        <a class="btn btn-primary" href="contact.html">Book a call</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>TKUNITY Light</h3>
+        <p>Warm experiences that build trust and skills.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Navigate</p>
+        <div class="list">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Connect</p>
+        <div class="list">
+          <a href="contact.html">Contact</a>
+          <a href="../privacy.html">Privacy</a>
+          <a href="../terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TKUNITY Light | Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #6b6b6b;
+      --accent: #1f5f4f;
+      --accent-2: #ffb46a;
+      --line: #e7e1d6;
+      --shadow: 0 20px 38px rgba(28, 28, 28, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, rgba(31, 95, 79, 0.08), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255, 180, 106, 0.2), transparent 55%),
+        var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 16px;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      padding: 36px 0 56px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      margin: 0 0 0.6rem;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      background: var(--accent-2);
+      color: #3c2600;
+      box-shadow: var(--shadow);
+    }
+
+    .footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .reveal {
+      animation: rise 0.9s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-3,
+      .grid-2,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav container">
+      <a class="logo" href="index.html">TKUNITY</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a class="nav-cta" href="contact.html">Say hello</a>
+    </nav>
+    <section class="hero container reveal">
+      <div>
+        <span class="eyebrow">Services</span>
+        <h1>Thoughtful support from discovery to delivery.</h1>
+        <p>We guide teams through calm, collaborative processes that lead to meaningful outcomes.</p>
+      </div>
+      <div class="hero-card reveal delay-1">
+        <h3>Service highlights</h3>
+        <p>Each service includes facilitation, reporting, and a shared roadmap.</p>
+        <div class="list">
+          <div>Experience strategy</div>
+          <div>Prototype build</div>
+          <div>Launch support</div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section container reveal">
+      <div class="grid-3">
+        <div class="card">
+          <h3>Discovery labs</h3>
+          <p>Facilitated sessions to define the goals and tone of the experience.</p>
+        </div>
+        <div class="card">
+          <h3>Prototype sprints</h3>
+          <p>Rapid builds for testing interaction, pacing, and learning flow.</p>
+        </div>
+        <div class="card">
+          <h3>Content shaping</h3>
+          <p>Story, art, and UX that support gentle, inclusive engagement.</p>
+        </div>
+        <div class="card">
+          <h3>Facilitator guides</h3>
+          <p>Materials for teams to run sessions confidently.</p>
+        </div>
+        <div class="card">
+          <h3>Feedback loops</h3>
+          <p>Structured playtests and reflection prompts.</p>
+        </div>
+        <div class="card">
+          <h3>Launch support</h3>
+          <p>Rollout plans and aftercare check-ins.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container reveal delay-1">
+      <div class="card">
+        <span class="eyebrow">Ready to plan</span>
+        <h2>Let us map a gentle path forward.</h2>
+        <p>We will tailor a studio plan with timelines, scope, and a shared ritual calendar.</p>
+        <a class="btn" href="contact.html">Start the conversation</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>TKUNITY Light</h3>
+        <p>Warm experiences that build trust and skills.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Navigate</p>
+        <div class="list">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Connect</p>
+        <div class="list">
+          <a href="contact.html">Contact</a>
+          <a href="../privacy.html">Privacy</a>
+          <a href="../terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

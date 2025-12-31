@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TKUNITY Light | Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --surface: #ffffff;
+      --ink: #1c1c1c;
+      --muted: #6b6b6b;
+      --accent: #1f5f4f;
+      --accent-2: #ffb46a;
+      --line: #e7e1d6;
+      --shadow: 0 20px 38px rgba(28, 28, 28, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Work Sans", sans-serif;
+      color: var(--ink);
+      background: radial-gradient(circle at top left, rgba(31, 95, 79, 0.08), transparent 50%),
+        radial-gradient(circle at bottom right, rgba(255, 180, 106, 0.2), transparent 55%),
+        var(--bg);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 16px;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 36px;
+      align-items: center;
+      padding: 36px 0 56px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+      margin: 0 0 0.6rem;
+      line-height: 1.1;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 4vw, 3.4rem);
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-card {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-family: inherit;
+      font-size: 1rem;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid transparent;
+      background: var(--accent-2);
+      color: #3c2600;
+      box-shadow: var(--shadow);
+    }
+
+    .list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .reveal {
+      animation: rise 0.9s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-2,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav container">
+      <a class="logo" href="index.html">TKUNITY</a>
+      <div class="nav-links">
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a class="nav-cta" href="contact.html">Say hello</a>
+    </nav>
+    <section class="hero container reveal">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h1>Start a gentle, people-first collaboration.</h1>
+        <p>Tell us about your team and we will shape a calm pilot.</p>
+      </div>
+      <div class="hero-card reveal delay-1">
+        <h3>Light studio contact</h3>
+        <div class="list">
+          <div>hello@tkunity.studio</div>
+          <div>Mon to Fri</div>
+          <div>Remote sessions</div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section container reveal">
+      <div class="grid-2">
+        <form class="card">
+          <h2>Project intake</h2>
+          <p>Let us know what kind of experience you want to create.</p>
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@example.com">
+          <label for="focus">Focus</label>
+          <select id="focus">
+            <option>Learning experience</option>
+            <option>Co-op game</option>
+            <option>Workshop facilitation</option>
+            <option>Other</option>
+          </select>
+          <label for="details">Details</label>
+          <textarea id="details" placeholder="Share goals, timeline, and audience"></textarea>
+          <button class="btn" type="submit">Send message</button>
+        </form>
+        <div class="card">
+          <h2>What happens next</h2>
+          <p>We reply within two business days with a short discovery plan.</p>
+          <div class="list">
+            <div>Intro call</div>
+            <div>Shared goals</div>
+            <div>Pilot outline</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>TKUNITY Light</h3>
+        <p>Warm experiences that build trust and skills.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Navigate</p>
+        <div class="list">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Connect</p>
+        <div class="list">
+          <a href="contact.html">Contact</a>
+          <a href="../privacy.html">Privacy</a>
+          <a href="../terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

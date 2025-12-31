@@ -13,33 +13,7 @@ class SiteController extends Controller
 {
     public function home(): View
     {
-        $featuredPost = Post::query()
-            ->with('category')
-            ->where('status', 'published')
-            ->where('is_featured', true)
-            ->orderByDesc('published_at')
-            ->first();
-
-        if (! $featuredPost) {
-            $featuredPost = Post::query()
-                ->with('category')
-                ->where('status', 'published')
-                ->orderByDesc('published_at')
-                ->first();
-        }
-
-        $latestPosts = Post::query()
-            ->with('category')
-            ->where('status', 'published')
-            ->when($featuredPost, fn ($query) => $query->where('id', '!=', $featuredPost->id))
-            ->orderByDesc('published_at')
-            ->take(3)
-            ->get();
-
-        return view('pages.home', [
-            'featuredPost' => $featuredPost,
-            'latestPosts' => $latestPosts,
-        ]);
+        return view('pages.home');
     }
 
     public function about(): View
@@ -52,10 +26,7 @@ class SiteController extends Controller
         return view('pages.contact');
     }
 
-    public function careers(): View
-    {
-        return view('pages.careers');
-    }
+
 
     public function login(): View
     {
@@ -102,45 +73,23 @@ class SiteController extends Controller
         return back()->with('status', 'Thanks for reaching out. We will get back to you shortly.');
     }
 
-    public function helpCenter(): View
+    public function games(): View
     {
-        return $this->renderPage('help-center', 'Help Center');
+        return view('pages.games');
     }
 
-    public function faqs(): View
+    public function aiTrainer(): View
     {
-        return $this->renderPage('faqs', 'FAQs');
-    }
-
-    public function partners(): View
-    {
-        return $this->renderPage('partners', 'Partners');
+        return view('pages.ai-trainer');
     }
 
     public function terms(): View
     {
-        return $this->renderPage('terms', 'Terms');
+        return view('pages.terms');
     }
 
     public function privacy(): View
     {
-        return $this->renderPage('privacy', 'Privacy');
-    }
-
-    private function renderPage(string $code, string $fallbackTitle): View
-    {
-        $page = Page::query()
-            ->where('is_active', true)
-            ->where(function ($query) use ($code) {
-                $query->where('code', $code)
-                    ->orWhere('slug', $code);
-            })
-            ->first();
-
-        return view('pages.static', [
-            'page' => $page,
-            'title' => $page?->title ?? $fallbackTitle,
-            'content' => $page?->getRawOriginal('content') ?? $page?->content ?? null,
-        ]);
+        return view('pages.privacy');
     }
 }

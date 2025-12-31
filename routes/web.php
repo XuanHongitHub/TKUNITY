@@ -8,14 +8,13 @@ Route::get('/', [SiteController::class, 'home'])->name('home');
 Route::get('/about-us', [SiteController::class, 'about'])->name('about');
 Route::get('/contact', [SiteController::class, 'contact'])->name('contact');
 Route::post('/contact', [SiteController::class, 'submitContact'])->name('contact.submit');
-Route::get('/careers', [SiteController::class, 'careers'])->name('careers');
+Route::get('/games', [SiteController::class, 'games'])->name('games');
+Route::get('/ai-trainer', [SiteController::class, 'aiTrainer'])->name('ai-trainer');
 Route::get('/login', [SiteController::class, 'login'])->name('login');
 Route::get('/news', [NewsController::class, 'index'])->name('news.index');
 Route::get('/news/category/{categorySlug}', [NewsController::class, 'index'])->name('news.category');
 Route::get('/news/{slug}', [NewsController::class, 'show'])->name('news.show');
-Route::get('/help-center', [SiteController::class, 'helpCenter'])->name('help');
-Route::get('/faqs', [SiteController::class, 'faqs'])->name('faqs');
-Route::get('/partners', [SiteController::class, 'partners'])->name('partners');
+
 Route::get('/terms', [SiteController::class, 'terms'])->name('terms');
 Route::get('/privacy', [SiteController::class, 'privacy'])->name('privacy');
 

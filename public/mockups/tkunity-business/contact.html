@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TKUNITY Business | Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f6f7;
+      --surface: #ffffff;
+      --ink: #111821;
+      --muted: #5b6770;
+      --accent: #1f4b67;
+      --accent-2: #f1a93b;
+      --line: #dbe2e7;
+      --shadow: 0 26px 44px rgba(17, 24, 33, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Source Sans 3", sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      background-image: linear-gradient(120deg, rgba(31, 75, 103, 0.08), transparent 45%),
+        repeating-linear-gradient(90deg, rgba(31, 75, 103, 0.06) 0 1px, transparent 1px 120px);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 0 18px;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      font-family: "Libre Baskerville", serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-cta {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: center;
+      padding: 48px 0 56px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Libre Baskerville", serif;
+      margin: 0 0 0.6rem;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 3.8vw, 3.1rem);
+    }
+
+    p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .hero-panel {
+      background: var(--surface);
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .section {
+      padding: 64px 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-family: inherit;
+      font-size: 1rem;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-2);
+      color: #3d2606;
+      box-shadow: var(--shadow);
+      border: none;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .list-item {
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #f8fafb;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .footer {
+      padding: 32px 0 48px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .reveal {
+      animation: rise 0.9s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-2,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav container">
+      <a class="logo" href="index.html">TKUNITY</a>
+      <div class="nav-links">
+        <a href="studio.html">Studio</a>
+        <a href="games.html">Games</a>
+        <a href="ai-trainer.html">AI Trainer</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a class="nav-cta" href="contact.html">Request a deck</a>
+    </nav>
+    <section class="hero container reveal">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h1>Start an enterprise pilot with TKUNITY.</h1>
+        <p>Tell us about your training needs and we will craft a proposal.</p>
+      </div>
+      <div class="hero-panel reveal delay-1">
+        <h3>Enterprise contact</h3>
+        <div class="list">
+          <div class="list-item"><span>Email</span><span>enterprise@tkunity.studio</span></div>
+          <div class="list-item"><span>Phone</span><span>+84 900 000 000</span></div>
+          <div class="list-item"><span>Response</span><span>2 business days</span></div>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <main>
+    <section class="section container reveal">
+      <div class="grid-2">
+        <form class="card">
+          <h2>Enterprise intake</h2>
+          <p>We will prepare a discovery workshop and pricing outline.</p>
+          <label for="company">Company</label>
+          <input id="company" type="text" placeholder="Company name">
+          <label for="contact">Primary contact</label>
+          <input id="contact" type="text" placeholder="Name and role">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="name@company.com">
+          <label for="focus">Program focus</label>
+          <select id="focus">
+            <option>Training simulation</option>
+            <option>Onboarding program</option>
+            <option>AI Trainer deployment</option>
+            <option>Engagement game</option>
+          </select>
+          <label for="details">Project details</label>
+          <textarea id="details" placeholder="Share goals, timeline, and audience"></textarea>
+          <button class="btn" type="submit">Submit request</button>
+        </form>
+        <div class="card">
+          <h2>What happens next</h2>
+          <p>We schedule a briefing call and confirm pilot scope.</p>
+          <div class="list">
+            <div class="list-item"><span>Step 1</span><span>Discovery call</span></div>
+            <div class="list-item"><span>Step 2</span><span>Workshop</span></div>
+            <div class="list-item"><span>Step 3</span><span>Proposal</span></div>
+          </div>
+          <p>Need urgent support? Email enterprise@tkunity.studio.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>TKUNITY Business</h3>
+        <p>Enterprise programs for learning, training, and engagement.</p>
+      </div>
+      <div>
+        <p class="eyebrow">Navigate</p>
+        <div class="list">
+          <a href="index.html">Home</a>
+          <a href="studio.html">Studio</a>
+          <a href="ai-trainer.html">AI Trainer</a>
+        </div>
+      </div>
+      <div>
+        <p class="eyebrow">Connect</p>
+        <div class="list">
+          <a href="contact.html">Contact</a>
+          <a href="../privacy.html">Privacy</a>
+          <a href="../terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

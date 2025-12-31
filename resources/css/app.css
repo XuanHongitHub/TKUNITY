@@ -500,9 +500,17 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
         padding-right: 2rem;
     }
 
+    .site-nav.landing-nav .mega-menu {
+        overflow-y: auto;
+        max-height: 100vh;
+        padding-bottom: 2rem;
+    }
+
     .site-nav.landing-nav .mega-menu-content {
         grid-template-columns: 1fr;
         padding: 2rem;
+        /* Ensure content doesn't get cut off */
+        padding-bottom: 6rem;
     }
 
     .site-nav.landing-nav .mega-menu-image-col {
