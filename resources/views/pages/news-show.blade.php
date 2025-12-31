@@ -620,14 +620,7 @@
         $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : null;
 
         if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
-             $slugMap = [
-                'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
-                'order-status-guide' => 'images/news/flat/order-status.png',
-                'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
-                'community-guidelines' => 'images/news/flat/community.png',
-            ];
-            $staticPath = $slugMap[$post->slug] ?? 'images/home/super_hero_bg.webp';
-            $featuredImagePath = '/' . $staticPath;
+            $featuredImagePath = '/images/home/super_hero_bg.webp';
         }
 
         $authorName = $post->author?->name ?? setting('site_name', 'TKUnity');
@@ -719,14 +712,7 @@
                         $relatedImagePath = $relatedImageUrl ? parse_url($relatedImageUrl, PHP_URL_PATH) : null;
                         
                         if (!$relatedImagePath || !file_exists(public_path(urldecode($relatedImagePath)))) {
-                            $slugMap = [
-                                'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
-                                'order-status-guide' => 'images/news/flat/order-status.png',
-                                'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
-                                'community-guidelines' => 'images/news/flat/community.png',
-                            ];
-                            $staticPath = $slugMap[$related->slug] ?? 'images/home/super_hero_bg.webp';
-                            $relatedImagePath = '/' . $staticPath;
+                            $relatedImagePath = '/images/home/super_hero_bg.webp';
                         }
                     @endphp
                     <a href="{{ route('news.show', $related->slug) }}" wire:navigate class="related-card">
