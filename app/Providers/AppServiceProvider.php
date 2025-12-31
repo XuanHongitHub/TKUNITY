@@ -26,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
 
         \Illuminate\Support\Facades\View::composer('components.site-header', function ($view) {
             $homeRoute = route('home');
+            $gamesRoute = \Illuminate\Support\Facades\Route::has('games') ? route('games') : '#games';
 
             $items = [
                 // Mega Menu Content (Hidden from Top Nav, triggered by Logo)
