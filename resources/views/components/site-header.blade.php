@@ -12,7 +12,7 @@
     $gamesRoute = \Route::has('games') ? route('games') : '#games';
     $helpRoute = \Route::has('help') ? route('help') : '#';
     $careersRoute = \Route::has('careers') ? route('careers') : '#';
-    $heroBannerUrl = setting_url('hero_banner') ?? asset('images/home/super_hero_bg.webp');
+    $heroBannerUrl = setting_url('hero_banner') ?? asset('images/home/landing_hero_bg.webp');
 
     // Active state helpers
     $isNewsPage = request()->routeIs('news.index') || request()->routeIs('news.show');

@@ -1,5 +1,5 @@
 @php   
-   $heroBannerUrl = setting_url('hero_banner', 'images/home/super_hero_bg.webp');
+   $heroBannerUrl = setting_url('hero_banner', 'images/home/landing_hero_bg.webp');
     $logoUrl = setting_url('site_logo') ?? asset('images/tkunity_red.webp');
 @endphp
 

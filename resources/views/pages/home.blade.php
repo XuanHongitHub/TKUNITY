@@ -1078,7 +1078,7 @@
 
 @section('content')
     <section class="hero">
-        <div class="hero-image-bg" style="background-image: url('{{ setting_url('hero_banner', 'images/home/super_hero_bg.webp') }}'); background-size: cover; background-position: center;"></div>
+        <div class="hero-image-bg" style="background-image: url('{{ setting_url('hero_banner', 'images/home/landing_hero_bg.webp') }}'); background-size: cover; background-position: center;"></div>
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
