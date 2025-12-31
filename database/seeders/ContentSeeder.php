@@ -527,7 +527,7 @@ HTML;
             */
 
             if ($postData['slug'] === 'getting-started-with-tkunity') {
-                $bannerPath = public_path('images/home/super_hero_bg.webp');
+                $bannerPath = public_path('images/home/landing_hero_bg.webp');
                 if (file_exists($bannerPath) && $post->getMedia('thumbnail')->isEmpty()) {
                     $post->addMedia($bannerPath)->toMediaCollection('thumbnail');
                 }

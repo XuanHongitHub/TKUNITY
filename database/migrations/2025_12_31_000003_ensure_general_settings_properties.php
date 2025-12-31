@@ -8,7 +8,7 @@ return new class extends SettingsMigration
     {
         // Ensure all properties in GeneralSettings exist
         if (!$this->migrator->exists('general.about_hero')) {
-            $this->migrator->add('general.about_hero', 'images/home/super_hero_bg.webp');
+            $this->migrator->add('general.about_hero', 'images/home/landing_hero_bg.webp');
         }
         
         if (!$this->migrator->exists('general.process_mockup')) {

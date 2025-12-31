@@ -24,8 +24,8 @@ class SettingsSeeder extends Seeder
         }
 
         if (! $settings->hero_banner || str_ends_with($settings->hero_banner, '.png')) {
-            $settings->hero_banner = 'images/home/super_hero_bg.webp';
-            $settings->about_hero = 'images/home/super_hero_bg.webp';
+            $settings->hero_banner = 'images/home/landing_hero_bg.webp';
+            $settings->about_hero = 'images/home/landing_hero_bg.webp';
             $settings->process_mockup = 'images/tkunity_devices.webp';
         }
 
