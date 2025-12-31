@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Season 4 Championship Begins - TKUnity News</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #080808;
+            --bg-alt: #0f0f0f;
+            --bg-elevated: #141414;
+            --border: #1f1f1f;
+            --border-bright: #2a2a2a;
+            --text: #f4f4f5;
+            --text-muted: #71717a;
+            --text-dim: #52525b;
+            --accent: #dc2626;
+            --accent-dark: #b91c1c;
+            --accent-glow: rgba(220, 38, 38, 0.15);
+            --secondary: #1e293b;
+            --success: #22c55e;
+            --gold: #fbbf24;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Article Header */
+        .article-header {
+            position: relative;
+            padding: 8rem 4rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .article-meta-top {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .article-category {
+            padding: 0.4rem 1rem;
+            background: var(--accent);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .article-date {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+
+        .article-date svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .article-header h1 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .article-header h1 span {
+            color: var(--accent);
+        }
+
+        .article-excerpt {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .article-author {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .author-info h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        .author-info span {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        /* Featured Image */
+        .article-featured-image {
+            position: relative;
+            aspect-ratio: 21/9;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--accent-glow) 0%, var(--bg-elevated) 50%, var(--bg-alt) 100%);
+        }
+
+        .article-featured-image::before {
+            content: 'CHAMPIONSHIP';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent);
+            opacity: 0.2;
+        }
+
+        /* Article Content */
+        .article-content {
+            max-width: 740px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .article-content h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .article-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .article-content p {
+            font-size: 1.0625rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content li {
+            font-size: 1.0625rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-content blockquote {
+            border-left: 3px solid var(--accent);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            font-size: 1.125rem;
+            color: var(--text);
+        }
+
+        .article-content a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .article-content a:hover {
+            opacity: 0.7;
+            text-decoration: underline;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.accent {
+            border-color: var(--accent);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .highlight-box h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box p {
+            font-size: 0.9375rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Prize Pool Banner */
+        .prize-banner {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin: 3rem auto;
+            max-width: 740px;
+        }
+
+        .prize-amount {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+        }
+
+        .prize-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 0.5rem;
+        }
+
+        /* Tournament Info */
+        .tournament-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .tournament-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .tournament-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+        }
+
+        .tournament-card .icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(220, 38, 38, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--accent);
+        }
+
+        .tournament-card .icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .tournament-card h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+        }
+
+        .tournament-card p {
+            font-size: 0.9375rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Game List */
+        .game-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .game-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s;
+        }
+
+        .game-item:hover {
+            border-color: var(--accent);
+        }
+
+        .game-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .game-info h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+        }
+
+        .game-info p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Article Footer */
+        .article-footer {
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+            padding: 4rem 2rem;
+        }
+
+        .article-footer-content {
+            max-width: 740px;
+            margin: 0 auto;
+        }
+
+        .share-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .share-section h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .share-links {
+            display: flex;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .share-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .share-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .share-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Related News */
+        .related-news {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .related-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .related-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .related-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .related-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .related-card-image {
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, var(--bg-alt) 0%, #1a1a1a 100%);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .related-card-category {
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .related-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .related-card p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Newsletter */
+        .newsletter-section {
+            background: var(--accent);
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+            margin: 4rem auto;
+            max-width: 740px;
+        }
+
+        .newsletter-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .newsletter-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            background: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9375rem;
+        }
+
+        .newsletter-form button {
+            padding: 0.875rem 1.5rem;
+            background: var(--bg);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            background: var(--bg-alt);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(4, 1fr);
+            gap: 3rem;
+            padding: 4rem 4rem 3rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            color: var(--text);
+        }
+
+        .footer-column a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 0.625rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo span {
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .footer-legal span {
+            font-size: 0.8125rem;
+            color: var(--text-dim);
+        }
+
+        .footer-legal a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+        }
+
+        .footer-legal a:hover {
+            color: var(--accent);
+        }
+
+        /* Back Button */
+        .back-button {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            z-index: 50;
+        }
+
+        .back-button:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .back-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .nav-links {
+                display: none;
+            }
+
+            .article-header,
+            .article-content {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .footer-bottom {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .game-list,
+            .tournament-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .article-header {
+                padding: 7rem 1.5rem 3rem;
+            }
+
+            .article-content {
+                padding: 2rem 1.5rem;
+            }
+
+            .article-featured-image {
+                aspect-ratio: 16/9;
+            }
+
+            .article-header h1 {
+                font-size: 1.75rem;
+            }
+
+            .prize-banner {
+                padding: 2rem 1.5rem;
+            }
+
+            .tournament-grid,
+            .game-list {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .footer-legal {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .back-button {
+                left: 1rem;
+                bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="landing.html" class="logo">
+            <div class="logo-icon">TK</div>
+            <div class="logo-text">UNITY</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="landing.html#games">Games</a></li>
+            <li><a href="landing.html#features">Features</a></li>
+            <li><a href="landing.html#community">Community</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="#" class="btn btn-outline">Topup</a>
+            <a href="#" class="btn btn-accent">Join</a>
+        </div>
+    </nav>
+
+    <!-- Article Header -->
+    <header class="article-header">
+        <div class="article-meta-top">
+            <span class="article-category">Tournaments</span>
+            <span class="article-date">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                December 28, 2024
+            </span>
+        </div>
+        <h1>Season 4 <span>Championship</span> Begins</h1>
+        <p class="article-excerpt">The biggest tournament of the year is here with a prize pool of $100,000. Register now and compete for glory across all supported games.</p>
+        <div class="article-author">
+            <div class="author-avatar">TK</div>
+            <div class="author-info">
+                <h4>TKUnity Team</h4>
+                <span>Official Announcement</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Image -->
+    <div class="article-featured-image"></div>
+
+    <!-- Article Content -->
+    <article class="article-content">
+        <p>The moment you've all been waiting for is finally here. TKUnity is proud to announce the start of Season 4 Championship, our biggest competitive gaming event of the year. With a massive prize pool of <strong>$100,000</strong>, this season promises to be the most exciting yet.</p>
+
+        <blockquote>
+            "This season represents our commitment to the competitive gaming community. We've listened to your feedback and made significant improvements to the tournament structure, prizing, and overall experience."
+        </blockquote>
+
+        <h2>What's New in Season 4</h2>
+        <p>We've made several major changes based on community feedback from Season 3. Here's what you can expect:</p>
+
+        <div class="highlight-box accent">
+            <h4>Key Updates</h4>
+            <p>• Increased prize pool from $75,000 to $100,000</p>
+            <p>• New double-elimination bracket format</p>
+            <p>• Improved anti-cheat measures</p>
+            <p>• Live streams with professional commentary</p>
+            <p>• Regional qualifiers for better ping</p>
+        </div>
+
+        <h2>Prize Distribution</h2>
+        <div class="prize-banner">
+            <span class="prize-amount">$100,000</span>
+            <span class="prize-label">Total Prize Pool</span>
+        </div>
+
+        <p>The prize pool will be distributed among the top performers in each game category:</p>
+        <ul>
+            <li><strong>1st Place:</strong> $25,000 per game + Championship Trophy</li>
+            <li><strong>2nd Place:</strong> $12,000 per game</li>
+            <li><strong>3rd Place:</strong> $6,000 per game</li>
+            <li><strong>4th-8th Place:</strong> $2,000 per team</li>
+        </ul>
+
+        <h2>Tournament Details</h2>
+        <div class="tournament-grid">
+            <div class="tournament-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                </div>
+                <h4>Registration</h4>
+                <p>Dec 28 - Jan 15</p>
+            </div>
+            <div class="tournament-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <h4>Qualifiers</h4>
+                <p>Jan 20 - Feb 10</p>
+            </div>
+            <div class="tournament-card">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                        <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                        <path d="M4 22h16"/>
+                        <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                        <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                        <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                    </svg>
+                </div>
+                <h4>Grand Finals</h4>
+                <p>Feb 24 - 25, 2025</p>
+            </div>
+        </div>
+
+        <h2>Participating Games</h2>
+        <p>The championship will feature competitions across all major titles on our platform. Choose your game and prove your skills:</p>
+
+        <div class="game-list">
+            <div class="game-item">
+                <div class="game-icon">SR</div>
+                <div class="game-info">
+                    <h4>Shadow Realms</h4>
+                    <p>Dark fantasy MMORPG</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <div class="game-icon">NS</div>
+                <div class="game-info">
+                    <h4>Neon Strike</h4>
+                    <p>Tactical FPS</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <div class="game-icon">AC</div>
+                <div class="game-info">
+                    <h4>Arena Champions</h4>
+                    <p>5v5 MOBA</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <div class="game-icon">SZ</div>
+                <div class="game-info">
+                    <h4>Storm Zone</h4>
+                    <p>Battle Royale</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <div class="game-icon">CR</div>
+                <div class="game-info">
+                    <h4>Cyber Racer</h4>
+                    <p>Racing Simulation</p>
+                </div>
+            </div>
+            <div class="game-item">
+                <div class="game-icon">KW</div>
+                <div class="game-info">
+                    <h4>Kingdom Wars</h4>
+                    <p>Strategy MMO</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>How to Register</h2>
+        <p>Getting started is easy. Follow these steps to secure your spot in the championship:</p>
+        <ol>
+            <li><strong>Create or Log in</strong> to your TKUnity account</li>
+            <li> Navigate to the <strong>Tournaments</strong> section</li>
+            <li>Select your preferred game and region</li>
+            <li>Complete team registration (solo players welcome too!)</li>
+            <li>Join our Discord for important updates and match schedules</li>
+        </ol>
+
+        <h3>Eligibility Requirements</h3>
+        <div class="highlight-box">
+            <h4>Who Can Participate</h4>
+            <p>• Players must be at least 16 years old</p>
+            <p>• Valid TKUnity account in good standing</p>
+            <p>• Minimum account level 15 (for fair matching)</p>
+            <p>• Teams must have 3-5 players depending on game</p>
+        </div>
+
+        <h2>Live Coverage</h2>
+        <p>All matches will be streamed live on our official channels with professional casters, analysis, and viewer-exclusive drops. Make sure to follow us on <a href="#">Twitch</a> and <a href="#">YouTube</a> so you don't miss any action.</p>
+
+        <p>Viewers can also participate in predictions and win exclusive in-game items and TKUnity credits during the broadcasts.</p>
+
+        <h2>Sponsor Spotlight</h2>
+        <p>We're grateful to our partners who make this championship possible:</p>
+        <p>This season is sponsored by leading gaming brands including Razer, ASUS ROG, and Discord. Their support helps us bring you the best competitive gaming experience possible.</p>
+
+        <h2>Frequently Asked Questions</h2>
+        <h3>Can I participate in multiple games?</h3>
+        <p>Yes! You can register for as many games as you want, but make sure your team can commit to the schedule for each tournament.</p>
+
+        <h3>What happens if I disconnect during a match?</h3>
+        <p>We have pause protocols in place for technical issues. Contact a tournament admin immediately via Discord if problems occur.</p>
+
+        <h3>Is there a registration fee?</h3>
+        <p>No, participation in the Season 4 Championship is completely free for all TKUnity users.</p>
+
+        <h2>Ready to Compete?</h2>
+        <p>The Season 4 Championship is your chance to prove yourself on the biggest stage. Whether you're a seasoned pro or an aspiring competitor, this is your moment to shine.</p>
+
+        <p>Registration closes on January 15, 2025. Don't miss your chance to become the next TKUnity Champion!</p>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="#" class="btn btn-accent" style="display: inline-flex; font-size: 1rem; padding: 1rem 2.5rem;">Register Now</a>
+        </div>
+    </article>
+
+    <!-- Article Footer -->
+    <footer class="article-footer">
+        <div class="article-footer-content">
+            <!-- Share Section -->
+            <div class="share-section">
+                <h3>Share this article</h3>
+                <div class="share-links">
+                    <a href="#" class="share-link" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="share-link" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="share-link" aria-label="Copy Link">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="newsletter-section">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for tournament updates and exclusive offers.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thanks for subscribing!');">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Related News -->
+    <section style="padding: 4rem 2rem; background: var(--bg-alt);">
+        <div class="related-news">
+            <div class="related-header">
+                <h3>Related News</h3>
+                <a href="landing.html" style="color: var(--accent); text-decoration: none; font-size: 0.875rem;">View All →</a>
+            </div>
+            <div class="related-grid">
+                <a href="#" class="related-card">
+                    <div class="related-card-image"></div>
+                    <span class="related-card-category">Updates</span>
+                    <h4>New Game Added: Shadow Realms</h4>
+                    <p>Explore the dark fantasy world with instant topup and exclusive rewards.</p>
+                </a>
+                <a href="#" class="related-card">
+                    <div class="related-card-image"></div>
+                    <span class="related-card-category">Community</span>
+                    <h4>Discord Milestone: 100K Members</h4>
+                    <p>Thank you for being part of our amazing community. Special rewards inside!</p>
+                </a>
+                <a href="#" class="related-card">
+                    <div class="related-card-image"></div>
+                    <span class="related-card-category">Events</span>
+                    <h4>Double Rewards Weekend</h4>
+                    <p>Get 2x points on all topups this weekend only. Limited time offer!</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <a href="landing.html" class="back-button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        Back to Home
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="landing.html" class="logo">
+                    <div class="logo-icon">TK</div>
+                    <div class="logo-text">UNITY</div>
+                </a>
+            </div>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <a href="landing.html#games">Games</a>
+                <a href="#">Topup</a>
+                <a href="#">Tournaments</a>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="about.html">About</a>
+                <a href="#">Careers</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Community</h4>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <span>TKUNITY</span>
+            </div>
+            <div class="footer-legal">
+                <span>© 2024 TKUnity. All rights reserved.</span>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(8, 8, 8, 0.95)';
+            } else {
+                nav.style.background = 'rgba(8, 8, 8, 0.85)';
+            }
+        });
+
+        // Copy link functionality
+        document.querySelector('.share-link[aria-label="Copy Link"]')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied to clipboard!');
+        });
+    </script>
+</body>
+</html>

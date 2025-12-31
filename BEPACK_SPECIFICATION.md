@@ -1,7 +1,7 @@
-# Bepack Laravel - Backend for All
+# TKUnity Laravel - Backend for All
 ## Tài liệu đặc tả chức năng (Functional Specifications)
 
-Tài liệu này mô tả chi tiết các module và tính năng trong gói **Bepack Laravel**, được thiết kế để làm nền tảng (boilerplate) chuyên nghiệp, linh hoạt và dễ mở rộng cho mọi dự án Web/App.
+Tài liệu này mô tả chi tiết các module và tính năng trong gói **TKUnity Laravel**, được thiết kế để làm nền tảng (boilerplate) chuyên nghiệp, linh hoạt và dễ mở rộng cho mọi dự án Web/App.
 
 ---
 

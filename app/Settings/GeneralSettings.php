@@ -14,6 +14,18 @@ class GeneralSettings extends Settings
     public ?string $seo_title;
     public ?string $seo_description;
     public array $social_links;
+    public ?string $site_head = null;
+    public ?string $site_footer = null;
+    public ?string $hero_banner = null;
+    public ?string $about_hero = null;
+    public ?string $process_mockup = null;
+    public ?string $logo_3d = null;
+    public ?string $logo_light = null;
+    public ?string $logo_dark = null;
+    public ?string $logo_red = null;
+    public ?string $google_tags = null;
+    public ?string $google_verify = null;
+    public ?string $tiktok_pixel = null;
 
     public static function group(): string
     {

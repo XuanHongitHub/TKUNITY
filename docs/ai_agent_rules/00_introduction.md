@@ -1,6 +1,6 @@
 # Introduction for Antigravity
 
-Chào **Antigravity**, đây là dự án **Bepack Laravel** - một bộ công cụ Backend toàn năng. Để làm việc hiệu quả nhất, bạn cần nắm vững:
+Chào **Antigravity**, đây là dự án **TKUnity Laravel** - một bộ công cụ Backend toàn năng. Để làm việc hiệu quả nhất, bạn cần nắm vững:
 
 ## 1. Stack công nghệ
 *   **PHP 8.3+** & **Laravel 11**.

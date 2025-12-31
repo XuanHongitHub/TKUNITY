@@ -122,6 +122,161 @@
             </div>
         </div>
 
+        <!-- Homepage Assets -->
+        <div class="fi-section rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10">
+            <div class="fi-section-header flex flex-col gap-3 px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+                <h3 class="fi-section-header-heading text-base font-semibold leading-6 text-gray-950 dark:text-white">
+                    Homepage Assets
+                </h3>
+                <p class="fi-section-header-description text-sm text-gray-500 dark:text-gray-400">
+                    Configure hero and brand visuals used across the landing page.
+                </p>
+            </div>
+            <div class="fi-section-content p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Hero Banner</label>
+                        <div class="mt-2 flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-950/5 dark:ring-white/10">
+                            <div class="flex items-center gap-4">
+                                @if($hero_banner)
+                                    <img src="{{ $hero_banner->temporaryUrl() }}" class="h-12 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @elseif($existing_hero_banner)
+                                    <img src="{{ setting_url('hero_banner') }}" class="h-12 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @endif
+                                <div class="text-sm text-gray-500">
+                                    <span class="block font-medium text-gray-900 dark:text-gray-200">Hero Banner</span>
+                                    <span class="text-xs">PNG, JPG up to 4MB</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Change</span>
+                                    <input type="file" wire:model="hero_banner" class="hidden" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div wire:loading wire:target="hero_banner" class="text-xs text-indigo-500 mt-1">Uploading...</div>
+                        @error('hero_banner') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Logo 3D</label>
+                        <div class="mt-2 flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-950/5 dark:ring-white/10">
+                            <div class="flex items-center gap-4">
+                                @if($logo_3d)
+                                    <img src="{{ $logo_3d->temporaryUrl() }}" class="h-12 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @elseif($existing_logo_3d)
+                                    <img src="{{ setting_url('logo_3d') }}" class="h-12 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @endif
+                                <div class="text-sm text-gray-500">
+                                    <span class="block font-medium text-gray-900 dark:text-gray-200">3D Logo</span>
+                                    <span class="text-xs">PNG, WEBP up to 4MB</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Change</span>
+                                    <input type="file" wire:model="logo_3d" class="hidden" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div wire:loading wire:target="logo_3d" class="text-xs text-indigo-500 mt-1">Uploading...</div>
+                        @error('logo_3d') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Logo Light</label>
+                        <div class="mt-2 flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-950/5 dark:ring-white/10">
+                            <div class="flex items-center gap-4">
+                                @if($logo_light)
+                                    <img src="{{ $logo_light->temporaryUrl() }}" class="h-10 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @elseif($existing_logo_light)
+                                    <img src="{{ setting_url('logo_light') }}" class="h-10 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @endif
+                                <div class="text-sm text-gray-500">
+                                    <span class="block font-medium text-gray-900 dark:text-gray-200">Light Logo</span>
+                                    <span class="text-xs">PNG, WEBP up to 2MB</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Change</span>
+                                    <input type="file" wire:model="logo_light" class="hidden" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div wire:loading wire:target="logo_light" class="text-xs text-indigo-500 mt-1">Uploading...</div>
+                        @error('logo_light') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Logo Dark</label>
+                        <div class="mt-2 flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-950/5 dark:ring-white/10">
+                            <div class="flex items-center gap-4">
+                                @if($logo_dark)
+                                    <img src="{{ $logo_dark->temporaryUrl() }}" class="h-10 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @elseif($existing_logo_dark)
+                                    <img src="{{ setting_url('logo_dark') }}" class="h-10 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @endif
+                                <div class="text-sm text-gray-500">
+                                    <span class="block font-medium text-gray-900 dark:text-gray-200">Dark Logo</span>
+                                    <span class="text-xs">PNG, WEBP up to 2MB</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Change</span>
+                                    <input type="file" wire:model="logo_dark" class="hidden" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div wire:loading wire:target="logo_dark" class="text-xs text-indigo-500 mt-1">Uploading...</div>
+                        @error('logo_dark') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Logo Red</label>
+                        <div class="mt-2 flex items-center justify-between p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ring-1 ring-gray-950/5 dark:ring-white/10">
+                            <div class="flex items-center gap-4">
+                                @if($logo_red)
+                                    <img src="{{ $logo_red->temporaryUrl() }}" class="h-10 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @elseif($existing_logo_red)
+                                    <img src="{{ setting_url('logo_red') }}" class="h-10 w-auto rounded border border-gray-200 dark:border-gray-700">
+                                @endif
+                                <div class="text-sm text-gray-500">
+                                    <span class="block font-medium text-gray-900 dark:text-gray-200">Red Logo</span>
+                                    <span class="text-xs">PNG, WEBP up to 2MB</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <label class="cursor-pointer inline-flex items-center gap-2 px-3 py-2 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg shadow-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                                    <svg class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                    </svg>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Change</span>
+                                    <input type="file" wire:model="logo_red" class="hidden" accept="image/*">
+                                </label>
+                            </div>
+                        </div>
+                        <div wire:loading wire:target="logo_red" class="text-xs text-indigo-500 mt-1">Uploading...</div>
+                        @error('logo_red') <p class="text-sm text-red-600 mt-1">{{ $message }}</p> @enderror
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- SEO Section -->
         <div class="fi-section rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10">
             <div class="fi-section-header flex flex-col gap-3 px-6 py-4 border-b border-gray-100 dark:border-gray-800">
@@ -142,6 +297,63 @@
                      <div class="space-y-2">
                         <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">SEO Description</label>
                         <textarea wire:model="seo_description" rows="2" 
+                            class="block w-full rounded-lg border-none bg-white/5 py-1.5 text-gray-950 shadow-sm ring-1 ring-inset ring-gray-950/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:focus:ring-indigo-500"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Tags -->
+        <div class="fi-section rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10">
+            <div class="fi-section-header flex flex-col gap-3 px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+                <h3 class="fi-section-header-heading text-base font-semibold leading-6 text-gray-950 dark:text-white">
+                    Marketing Tags
+                </h3>
+                <p class="fi-section-header-description text-sm text-gray-500 dark:text-gray-400">
+                    Add verification or tracking scripts for analytics platforms.
+                </p>
+            </div>
+            <div class="fi-section-content p-6">
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Google Tags</label>
+                        <textarea wire:model="google_tags" rows="3"
+                            class="block w-full rounded-lg border-none bg-white/5 py-1.5 text-gray-950 shadow-sm ring-1 ring-inset ring-gray-950/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:focus:ring-indigo-500"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Google Verification</label>
+                        <input type="text" wire:model="google_verify"
+                            class="block w-full rounded-lg border-none bg-white/5 py-1.5 text-gray-950 shadow-sm ring-1 ring-inset ring-gray-950/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:focus:ring-indigo-500">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">TikTok Pixel</label>
+                        <textarea wire:model="tiktok_pixel" rows="3"
+                            class="block w-full rounded-lg border-none bg-white/5 py-1.5 text-gray-950 shadow-sm ring-1 ring-inset ring-gray-950/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:focus:ring-indigo-500"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Head/Footer Scripts -->
+        <div class="fi-section rounded-xl bg-white shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10">
+            <div class="fi-section-header flex flex-col gap-3 px-6 py-4 border-b border-gray-100 dark:border-gray-800">
+                <h3 class="fi-section-header-heading text-base font-semibold leading-6 text-gray-950 dark:text-white">
+                    Head & Footer Scripts
+                </h3>
+                <p class="fi-section-header-description text-sm text-gray-500 dark:text-gray-400">
+                    Inject custom markup or scripts into the site head and footer.
+                </p>
+            </div>
+            <div class="fi-section-content p-6">
+                <div class="grid grid-cols-1 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Site Head (before &lt;/head&gt;)</label>
+                        <textarea wire:model="site_head" rows="4"
+                            class="block w-full rounded-lg border-none bg-white/5 py-1.5 text-gray-950 shadow-sm ring-1 ring-inset ring-gray-950/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:focus:ring-indigo-500"></textarea>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium leading-6 text-gray-950 dark:text-white">Site Footer (before &lt;/body&gt;)</label>
+                        <textarea wire:model="site_footer" rows="4"
                             class="block w-full rounded-lg border-none bg-white/5 py-1.5 text-gray-950 shadow-sm ring-1 ring-inset ring-gray-950/10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:bg-white/5 dark:text-white dark:ring-white/10 dark:focus:ring-indigo-500"></textarea>
                     </div>
                 </div>

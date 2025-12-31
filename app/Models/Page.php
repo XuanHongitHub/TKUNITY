@@ -13,6 +13,6 @@ class Page extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
-        'content' => 'array', // If using a block builder, otherwise 'string' if rich editor
+        'content' => 'string', // If using a block builder, otherwise 'string' if rich editor
     ];
 }

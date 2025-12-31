@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class BepackSystemTest extends TestCase
+class TKUnitySystemTest extends TestCase
 {
     use RefreshDatabase; // Resets DB for each test
 

@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         $user = User::firstOrCreate(
-            ['email' => 'admin@bepack.com'],
+            ['email' => 'admin@tkunity.com'],
             [
                 'name' => 'Super Admin',
                 'password' => Hash::make('password'),
@@ -23,12 +23,11 @@ class AdminUserSeeder extends Seeder
             ]
         );
 
-        // Ensure super_admin role exists (Shield should handle this but being explicit is good)
         $roleName = Utils::getSuperAdminName();
         $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
-        
+
         $user->assignRole($role);
-        
-        $this->command->info("User 'admin@bepack.com' created with role {$roleName}");
+
+        $this->command->info("User 'admin@tkunity.com' created with role {$roleName}");
     }
 }

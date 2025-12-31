@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topup - TKUnity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #080808;
+            --bg-alt: #0f0f0f;
+            --bg-elevated: #141414;
+            --border: #1f1f1f;
+            --border-bright: #2a2a2a;
+            --text: #f4f4f5;
+            --text-muted: #71717a;
+            --text-dim: #52525b;
+            --accent: #dc2626;
+            --accent-dark: #b91c1c;
+            --accent-glow: rgba(220, 38, 38, 0.15);
+            --success: #22c55e;
+            --gold: #fbbf24;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.125rem;
+            letter-spacing: -0.02em;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-accent:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 6rem 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent);
+        }
+
+        .breadcrumb span {
+            color: var(--text-dim);
+            margin: 0 0.5rem;
+        }
+
+        /* Topup Container */
+        .topup-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 4rem 6rem;
+        }
+
+        /* Game Selection */
+        .game-selector {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-select {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .game-select:hover {
+            border-color: var(--accent);
+        }
+
+        .game-select-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #dc2626 0%, #7f1d1d 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        .game-select-info h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .game-select-info p {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .game-select-arrow {
+            margin-left: auto;
+        }
+
+        /* Amount Grid */
+        .amount-section {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .amount-card {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .amount-card:hover {
+            border-color: var(--accent);
+        }
+
+        .amount-card.selected {
+            border-color: var(--accent);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .amount-card.selected::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .amount-card .credits {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+
+        .amount-card .bonus {
+            font-size: 0.75rem;
+            color: var(--success);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .amount-card .price {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .amount-input-custom {
+            grid-column: span 4;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .amount-input-custom label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .amount-input-wrapper {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .amount-input-wrapper input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .amount-input-wrapper input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Account Input */
+        .account-section {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group label .required {
+            color: var(--accent);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9375rem;
+            color: var(--text);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Payment Methods */
+        .payment-section {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .payment-card {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-height: 100px;
+        }
+
+        .payment-card:hover {
+            border-color: var(--accent);
+        }
+
+        .payment-card.selected {
+            border-color: var(--accent);
+            background: rgba(220, 38, 38, 0.05);
+        }
+
+        .payment-card svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .payment-card span {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: sticky;
+            top: 6rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-row.label span:first-child {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .summary-row.label span:last-child {
+            font-weight: 600;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid var(--border);
+            margin-top: 1rem;
+            padding-top: 1.5rem;
+        }
+
+        .summary-row.total span:first-child {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .summary-row.total span:last-child {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .summary-bonus {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid var(--success);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8125rem;
+            color: var(--success);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-dark);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: var(--text-dim);
+            cursor: not-allowed;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .secure-badge svg {
+            width: 14px;
+            height: 14px;
+            color: var(--success);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-alt);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1.5fr repeat(4, 1fr);
+            gap: 3rem;
+            padding: 4rem 4rem 3rem;
+        }
+
+        .footer-column h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.25rem;
+            color: var(--text);
+        }
+
+        .footer-column a {
+            display: block;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            margin-bottom: 0.625rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 4rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo span {
+            font-weight: 700;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .footer-legal span {
+            font-size: 0.8125rem;
+            color: var(--text-dim);
+        }
+
+        .footer-legal a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8125rem;
+        }
+
+        .footer-legal a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .nav-links {
+                display: none;
+            }
+
+            .topup-container {
+                grid-template-columns: 1fr;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .order-summary {
+                position: static;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .footer-bottom {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .breadcrumb {
+                padding: 6rem 1.5rem 2rem;
+            }
+
+            .topup-container {
+                padding: 2rem 1.5rem 4rem;
+            }
+
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .amount-input-custom {
+                grid-column: span 2;
+            }
+
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="landing.html" class="logo">
+            <div class="logo-icon">TK</div>
+            <div class="logo-text">UNITY</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="games.html">Games</a></li>
+            <li><a href="landing.html#features">Features</a></li>
+            <li><a href="landing.html#community">Community</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="nav-right">
+            <a href="login.html" class="btn btn-outline">Login</a>
+            <a href="#" class="btn btn-accent">Join</a>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="landing.html">Home</a>
+        <span>/</span>
+        <a href="games.html">Games</a>
+        <span>/</span>
+        <span>Topup</span>
+    </div>
+
+    <!-- Topup Container -->
+    <div class="topup-container">
+        <main>
+            <!-- Game Selection -->
+            <div class="game-selector">
+                <h2 class="section-title">Select Game</h2>
+                <div class="game-select">
+                    <div class="game-select-icon">SR</div>
+                    <div class="game-select-info">
+                        <h3>Shadow Realms</h3>
+                        <p>Dark fantasy MMORPG</p>
+                    </div>
+                    <div class="game-select-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amount Selection -->
+            <div class="amount-section">
+                <h2 class="section-title">Select Amount</h2>
+                <div class="amount-grid">
+                    <div class="amount-card" onclick="selectAmount(this, 500, 4.99)">
+                        <span class="credits">500</span>
+                        <span class="bonus">+0 Bonus</span>
+                        <span class="price">$4.99</span>
+                    </div>
+                    <div class="amount-card" onclick="selectAmount(this, 1200, 9.99)">
+                        <span class="credits">1,200</span>
+                        <span class="bonus">+200 Bonus</span>
+                        <span class="price">$9.99</span>
+                    </div>
+                    <div class="amount-card selected" onclick="selectAmount(this, 2500, 19.99)">
+                        <span class="credits">2,500</span>
+                        <span class="bonus">+500 Bonus</span>
+                        <span class="price">$19.99</span>
+                    </div>
+                    <div class="amount-card" onclick="selectAmount(this, 5000, 39.99)">
+                        <span class="credits">5,000</span>
+                        <span class="bonus">+1,500 Bonus</span>
+                        <span class="price">$39.99</span>
+                    </div>
+                    <div class="amount-card" onclick="selectAmount(this, 10000, 74.99)">
+                        <span class="credits">10,000</span>
+                        <span class="bonus">+4,000 Bonus</span>
+                        <span class="price">$74.99</span>
+                    </div>
+                    <div class="amount-card" onclick="selectAmount(this, 25000, 149.99)">
+                        <span class="credits">25,000</span>
+                        <span class="bonus">+12,500 Bonus</span>
+                        <span class="price">$149.99</span>
+                    </div>
+                    <div class="amount-card" onclick="selectAmount(this, 50000, 274.99)">
+                        <span class="credits">50,000</span>
+                        <span class="bonus">+30,000 Bonus</span>
+                        <span class="price">$274.99</span>
+                    </div>
+                    <div class="amount-card" onclick="selectAmount(this, 100000, 499.99)">
+                        <span class="credits">100,000</span>
+                        <span class="bonus">+75,000 Bonus</span>
+                        <span class="price">$499.99</span>
+                    </div>
+                    <div class="amount-input-custom">
+                        <label>Custom Amount</label>
+                        <div class="amount-input-wrapper">
+                            <input type="number" placeholder="Enter amount (min 100)" min="100" id="customAmount">
+                            <input type="text" placeholder="Price" id="customPrice" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Info -->
+            <div class="account-section">
+                <h2 class="section-title">Account Information</h2>
+                <div class="form-group">
+                    <label>Player ID / Username <span class="required">*</span></label>
+                    <input type="text" placeholder="Enter your Player ID or Username">
+                </div>
+                <div class="form-group">
+                    <label>Server (Optional)</label>
+                    <input type="text" placeholder="e.g., Asia, Europe, America">
+                </div>
+            </div>
+
+            <!-- Payment Method -->
+            <div class="payment-section">
+                <h2 class="section-title">Payment Method</h2>
+                <div class="payment-grid">
+                    <div class="payment-card selected" onclick="selectPayment(this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                        <span>Credit Card</span>
+                    </div>
+                    <div class="payment-card" onclick="selectPayment(this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="5" width="20" height="14" rx="2"/>
+                            <line x1="2" y1="10" x2="22" y2="10"/>
+                        </svg>
+                        <span>PayPal</span>
+                    </div>
+                    <div class="payment-card" onclick="selectPayment(this)">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17.652 18.477c-2.25 1.383-5.524 1.383-5.524 1.383h-6.11l-.387-2.327-.916-5.535-.077-.463H4.628c-1.237 0-1.333-1.032-.598-1.237 1.075-.3 1.333-1.036 1.65-2.26.224-.857.596-2.26.596-2.26h1.88c.83 0 1.19.75 1.04 1.41-.15.66-.6 2.55-.6 2.55-.15.6.15 1.05.9 1.05h3.3c1.8 0 3.45-.75 4.35-2.55.6-1.2.9-2.7.9-2.7.3-.9.15-1.8-.45-2.25-.6-.45-1.65-.45-2.4 0-.75.3-1.05 1.05-.6 1.8.15.6-.15 1.35-.9 1.35H8.72c-.75 0-1.2-.6-1.05-1.35.15-.75.75-3 1.65-4.95.6-1.2 1.65-1.8 2.85-1.8h4.35c1.5 0 2.7 1.05 3.15 2.4.45 1.35-.15 2.85-.75 4.05-.6 1.2-1.35 2.25-2.55 2.85z"/>
+                        </svg>
+                        <span>Momo</span>
+                    </div>
+                    <div class="payment-card" onclick="selectPayment(this)">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                        <span>Zalo Pay</span>
+                    </div>
+                    <div class="payment-card" onclick="selectPayment(this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                        <span>Bank Transfer</span>
+                    </div>
+                    <div class="payment-card" onclick="selectPayment(this)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/>
+                            <path d="M12 18V6"/>
+                        </svg>
+                        <span>Crypto</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Order Summary -->
+        <aside>
+            <div class="order-summary">
+                <h2 class="section-title">Order Summary</h2>
+
+                <div class="summary-row label">
+                    <span>Game</span>
+                    <span>Shadow Realms</span>
+                </div>
+                <div class="summary-row label">
+                    <span>Credits</span>
+                    <span id="summaryCredits">2,500</span>
+                </div>
+                <div class="summary-row label">
+                    <span>Bonus</span>
+                    <span id="summaryBonus">+500</span>
+                </div>
+
+                <div class="summary-bonus">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    You save 20% with this pack!
+                </div>
+
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="summaryTotal">$19.99</span>
+                </div>
+
+                <button class="submit-btn" onclick="processTopup()">
+                    Continue to Payment
+                </button>
+
+                <div class="secure-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    Secure 256-bit SSL encrypted payment
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="landing.html" class="logo">
+                    <div class="logo-icon">TK</div>
+                    <div class="logo-text">UNITY</div>
+                </a>
+            </div>
+            <div class="footer-column">
+                <h4>Platform</h4>
+                <a href="games.html">Games</a>
+                <a href="#">Topup</a>
+                <a href="#">Tournaments</a>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <a href="about.html">About</a>
+                <a href="careers.html">Careers</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-column">
+                <h4>Community</h4>
+                <a href="#">Discord</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-logo">
+                <span>TKUNITY</span>
+            </div>
+            <div class="footer-legal">
+                <span>© 2024 TKUnity. All rights reserved.</span>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedCredits = 2500;
+        let selectedPrice = 19.99;
+        let selectedBonus = 500;
+
+        function selectAmount(element, credits, price) {
+            document.querySelectorAll('.amount-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+
+            selectedCredits = credits;
+            selectedPrice = price;
+
+            // Calculate bonus (20% for demonstration)
+            const bonusCards = [1200, 2500, 5000, 10000, 25000, 50000, 100000];
+            if (bonusCards.includes(credits)) {
+                selectedBonus = Math.floor(credits * 0.2);
+            } else {
+                selectedBonus = 0;
+            }
+
+            updateSummary();
+        }
+
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function updateSummary() {
+            document.getElementById('summaryCredits').textContent = selectedCredits.toLocaleString();
+            document.getElementById('summaryBonus').textContent = '+' + selectedBonus.toLocaleString();
+            document.getElementById('summaryTotal').textContent = '$' + selectedPrice.toFixed(2);
+        }
+
+        function processTopup() {
+            alert('Redirecting to payment gateway...');
+        }
+
+        // Custom amount calculation
+        const customAmountInput = document.getElementById('customAmount');
+        const customPriceInput = document.getElementById('customPrice');
+
+        customAmountInput?.addEventListener('input', function() {
+            const amount = parseInt(this.value);
+            if (amount >= 100) {
+                const price = (amount / 100).toFixed(2);
+                customPriceInput.value = '$' + price;
+                selectedCredits = amount;
+                selectedPrice = parseFloat(price);
+                selectedBonus = 0;
+                updateSummary();
+
+                document.querySelectorAll('.amount-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+            }
+        });
+
+        // Navbar scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(8, 8, 8, 0.95)';
+            } else {
+                nav.style.background = 'rgba(8, 8, 8, 0.85)';
+            }
+        });
+    </script>
+</body>
+</html>

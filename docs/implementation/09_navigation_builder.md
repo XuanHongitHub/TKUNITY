@@ -1,18 +1,43 @@
-# Step 9: Navigation & Menu Builder
+# Step 9: Navigation & Menu
 
-## 1. Mục tiêu
-Cho phép Admin quản lý các thanh Menu (Header, Footer, Mobile) một cách linh hoạt mà không cần can thiệp vào code.
+## Current Implementation
 
-## 2. Kiến trúc & Package
-*   **Package gợi ý:** `biostack/filament-menu-builder` hoặc tự build bằng `filament-forms` (Repeater).
-*   **Cấu trúc bảng `menus`:** `name`, `location` (key để gọi ngoài frontend).
-*   **Cấu trúc bảng `menu_items`:** `label`, `url`, `type` (internal/external), `parent_id`, `order`, `new_tab` (boolean).
+Navigation is managed through hardcoded Blade components with support for dynamic site settings:
 
-## 3. UI/UX Chức năng
-*   **Drag & Drop:** Sử dụng thư viện Reorderable để kéo thả sắp xếp thứ tự và cấp độ menu.
-*   **Searchable links:** Khi chọn link nội bộ, cho phép tìm kiếm nhanh theo tiêu đề bài viết (Post) hoặc trang (Page) để tự động lấy URL.
-*   **Icon Support:** Cho phép chọn icon (Heroicons) cho từng menu item.
+### Components
+- **`<x-site-header />`** - Shared header component with two variants:
+  - `landing` - Full navigation with mega menu dropdown
+  - `default` - Standard navigation for inner pages
+- **`<x-site-footer />`** - Shared footer component
 
-## 4. Frontend Integration
-*   Tạo một **View Composer** để luôn cung cấp biến menu cho các Layout Blade.
-*   Viết Blade Component `@menu('header')` để render menu theo cấu trúc đa cấp.
+### Configuration
+Navigation items are defined in `resources/views/components/site-header.blade.php`:
+
+```blade
+$navItems = [
+    ['label' => 'Home', 'url' => route('home'), 'target' => '_self', 'active' => request()->routeIs('home')],
+    ['label' => 'Games', 'url' => '#games', 'target' => '_self', 'active' => false],
+    ['label' => 'About', 'url' => route('about'), 'target' => '_self', 'active' => request()->routeIs('about')],
+    ['label' => 'News', 'url' => route('news.index'), 'target' => '_self', 'active' => request()->routeIs('news.index', 'news.show')],
+    ['label' => 'Contact', 'url' => route('contact'), 'target' => '_self', 'active' => request()->routeIs('contact')],
+];
+```
+
+### Usage in Pages
+Pages specify which navigation variant to use:
+```blade
+@section('nav_variant', 'landing')  <!-- or 'default' -->
+```
+
+### Dynamic Elements
+- Site name from `setting('site_name')`
+- Logo from `setting_url('site_logo')`
+- Hero banner from `setting_url('hero_banner')`
+- Theme color from `setting('theme_color')`
+
+## Future Enhancement
+For dynamic menu management without coding, consider implementing:
+- Filament-based navigation admin panel
+- Drag-and-drop reordering
+- Mega menu configuration
+- Multi-level menu support

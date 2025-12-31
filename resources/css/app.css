@@ -6,6 +6,675 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+    --bg: #080808;
+    --bg-alt: #0f0f0f;
+    --bg-elevated: #141414;
+    --border: #1f1f1f;
+    --border-bright: #2a2a2a;
+    --text: #f4f4f5;
+    --text-muted: #71717a;
+    --text-dim: #52525b;
+    --accent: #dc2626;
+    --accent-dark: #b91c1c;
+    --accent-glow: rgba(220, 38, 38, 0.15);
+    --secondary: #1e293b;
+    --success: #22c55e;
+    --gold: #fbbf24;
+
+    --nav-height: 80px;
+    --container-max: 1400px;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+::selection {
+    background: var(--accent);
+    color: white;
+}
+
+/* ============================================
+   SCROLLBAR STYLES (Clean & Minimal)
+   ============================================ */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 5px;
+    border: 2px solid var(--bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-bright);
+}
+
+/* Firefox Scrollbar */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) var(--bg);
+}
+
+/* ============================================
+   SITE HEADER / NAVIGATION
+   ============================================ */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 3rem;
+    height: var(--nav-height);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8, 8, 8, 0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+/* Landing Nav Variant */
+.site-nav.landing-nav {
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.site-nav.landing-nav.nav-scrolled {
+    background: rgba(8, 8, 8, 0.98);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* Logo */
+.site-nav .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    /* Tightened based on user request */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.site-nav .logo-img {
+    height: 28px;
+    width: auto;
+    display: block;
+    /* Base: Always turn to Black first, then Invert to color to prevent flicker */
+    filter: brightness(0) invert(1);
+    /* ABSOLUTELY NO TRANSITION on filter to prevent intermediate color interpolation */
+    transition: none !important;
+}
+
+/* Hover/Active Toggle State: Both turn Red */
+.site-nav .logo-wrapper:hover .logo-img,
+.site-nav .logo-wrapper.active .logo-img {
+    /* Stable Red Filter starting from Black base */
+    filter: brightness(0) invert(19%) sepia(85%) saturate(7483%) hue-rotate(352deg) brightness(95%) contrast(105%);
+    transition: none !important;
+}
+
+.site-nav .logo-arrow {
+    width: 14px;
+    height: 14px;
+    color: white;
+    /* Instant sync with Logo */
+    transition: color 0.1s ease;
+}
+
+.site-nav .logo-wrapper:hover .logo-arrow,
+.site-nav .logo-wrapper.active .logo-arrow {
+    color: var(--accent);
+    /* Matches Logo Red */
+}
+
+/* Menu Open State: Both turn Black on White BG */
+body.nav-open .site-nav .logo-img {
+    filter: brightness(0) !important;
+}
+
+body.nav-open .site-nav .logo-arrow {
+    color: #000 !important;
+}
+
+/* Nav Links */
+.site-nav .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+}
+
+.site-nav.default-nav .nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.site-nav.landing-nav .nav-links {
+    gap: 0 !important;
+    /* Ensuring gap doesn't conflict, using margin instead for consistent transform spacing */
+    margin: 0 auto !important;
+}
+
+/* Landing nav link cleanup */
+.site-nav.landing-nav .nav-links a {
+    display: block !important;
+    padding: 10px 0 !important;
+    margin: 0 1.25rem !important;
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.site-nav.landing-nav .nav-links a span {
+    display: block;
+}
+
+.site-nav .nav-links a:hover,
+.site-nav .nav-links a.active {
+    color: white;
+}
+
+.site-nav .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-50%);
+}
+
+.site-nav .nav-links a:hover::after,
+.site-nav .nav-links a.active::after {
+    width: 100%;
+}
+
+/* Nav Right */
+.site-nav .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 110;
+}
+
+/* Ensure Nav Elements sit above Mega Menu/Backdrop */
+.site-nav .logo-wrapper,
+.site-nav .logo,
+.site-nav .nav-links {
+    position: relative;
+    z-index: 110;
+}
+
+/* Logo Wrapper */
+.site-nav.landing-nav .logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    /* Tightened arrow position */
+    cursor: pointer;
+    position: relative;
+    z-index: 110;
+}
+
+.site-nav.landing-nav .logo-wrapper.active .logo-arrow {
+    transform: rotate(180deg);
+}
+
+/* Mega Menu (Landing) */
+.site-nav.landing-nav .mega-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 480px;
+    background: #fff;
+    z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding-top: var(--nav-height);
+    pointer-events: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.site-nav.landing-nav .mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+
+
+/* Menu Backdrop */
+.site-nav.landing-nav .menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    z-index: 80;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.site-nav.landing-nav .menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+
+body.nav-open .site-nav.landing-nav .nav-links a {
+    color: #000;
+}
+
+body.nav-open .site-nav.landing-nav .nav-links a:hover {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--accent);
+}
+
+/* ============================================
+   SITE FOOTER
+   ============================================ */
+.site-footer {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+}
+
+.site-footer .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+    gap: 3rem;
+    padding: 4rem 4rem 3rem;
+}
+
+.site-footer .footer-brand .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.site-footer .footer-brand .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: white;
+}
+
+.site-footer .footer-brand .logo-text {
+    font-weight: 700;
+    font-size: 1.125rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+}
+
+.site-footer .footer-brand .logo-img {
+    height: 32px;
+    width: auto;
+}
+
+.site-footer .footer-column h4 {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.25rem;
+    color: var(--text);
+}
+
+.site-footer .footer-column a {
+    display: block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 0.625rem;
+    transition: color 0.2s;
+}
+
+.site-footer .footer-column a:hover {
+    color: var(--accent);
+}
+
+.site-footer .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    border-top: 1px solid var(--border);
+}
+
+.site-footer .footer-logo span {
+    font-weight: 700;
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+}
+
+.site-footer .footer-legal {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.site-footer .footer-legal span {
+    font-size: 0.8125rem;
+    color: var(--text-dim);
+}
+
+.site-footer .footer-legal a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.8125rem;
+}
+
+.site-footer .footer-legal a:hover {
+    color: var(--accent);
+}
+
+.site-footer .footer-social {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.site-footer .footer-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-muted);
+    transition: all 0.3s;
+}
+
+.site-footer .footer-social a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+}
+
+.btn-accent {
+    background: var(--accent);
+    color: white;
+}
+
+.btn-accent:hover {
+    background: var(--accent-dark);
+    box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1100px) {
+    .site-nav .nav-links {
+        display: none;
+    }
+
+    .site-footer .footer-top {
+        grid-template-columns: 1fr 1fr;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .site-footer .footer-bottom {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .site-nav.landing-nav .mega-menu-content {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+    }
+
+    .site-nav.landing-nav .mega-menu-image-col {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .site-nav {
+        padding: 0 1.5rem;
+    }
+
+    .site-footer .footer-top {
+        grid-template-columns: 1fr;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .site-footer .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .site-footer .footer-legal {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+/* ============================================
+   MEGA MENU
+   ============================================ */
+.site-nav .mega-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    min-height: 400px;
+    background: #fff;
+    z-index: 101;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    padding-top: 80px;
+    pointer-events: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.site-nav .mega-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.site-nav .mega-menu-content {
+    display: grid;
+    /* 3 text columns (Games, Support, Company) + 1 enlarged image column */
+    grid-template-columns: repeat(3, 1fr) 480px;
+    gap: 2rem;
+    padding: 3rem 4rem 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.site-nav .mega-menu-category h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.site-nav .mega-menu-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.site-nav .mega-menu-category li {
+    margin-bottom: 0.5rem;
+}
+
+.site-nav .mega-menu-category a {
+    color: #444;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    display: block;
+    padding: 0.5rem 0;
+    transition: all 0.2s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.site-nav .mega-menu-category a:hover {
+    color: var(--accent);
+    padding-left: 0.5rem;
+}
+
+.site-nav .mega-menu-image-col {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.site-nav .mega-feat-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.site-nav .mega-menu-image-col:hover .mega-feat-img {
+    transform: scale(1.05);
+}
+
+.site-nav .mega-feat-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: white;
+    pointer-events: none;
+}
+
+.site-nav .mega-feat-content h5 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    text-transform: uppercase;
+}
+
+.site-nav .mega-feat-content p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+    font-weight: 400;
+}
+
+.menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 80;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+}
+
+.menu-backdrop.active {
+    opacity: 1;
+    visibility: visible;
 }

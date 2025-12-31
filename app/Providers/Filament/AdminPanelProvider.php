@@ -28,7 +28,45 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+            ->login(\App\Filament\Pages\Auth\Login::class)
+            ->sidebarCollapsibleOnDesktop()
+            ->font('Space Grotesk')
+            ->renderHook(
+                \Filament\View\PanelsRenderHook::HEAD_END,
+                fn () => \Illuminate\Support\Facades\Blade::render(<<<'HTML'
+                    <style>
+                        :root {
+                            --fi-sidebar-width: 16rem !important;
+                        }
+                        /* Compact Sidebar Customization */
+                        .fi-sidebar-header {
+                            padding-top: 0.75rem !important;
+                            padding-bottom: 0.75rem !important;
+                            height: auto !important;
+                        }
+                        .fi-sidebar-nav {
+                            gap: 0.125rem !important;
+                        }
+                        .fi-sidebar-item {
+                            padding-block: 0.25rem !important;
+                            padding-inline: 0.5rem !important;
+                        }
+                        .fi-sidebar-item-button {
+                            padding-block: 0.375rem !important;
+                            padding-inline: 0.5rem !important;
+                        }
+                        .fi-sidebar-item-label {
+                            font-size: 0.8125rem !important;
+                            font-weight: 500 !important;
+                        }
+                        .fi-sidebar-group-label {
+                            padding-block: 0.5rem !important;
+                            font-size: 0.75rem !important;
+                        }
+                    </style>
+                    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+                HTML)
+            )
             ->colors([
                 'primary' => Color::Amber,
             ])
