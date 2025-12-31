@@ -14,7 +14,7 @@ return new class extends SettingsMigration
         $this->migrator->add('general.seo_title', 'TKUnity - Admin Panel');
         $this->migrator->add('general.seo_description', 'Manage your application with ease.');
         $this->migrator->add('general.social_links', []);
-        $this->migrator->add('general.hero_banner', 'images/home/super_hero_bg.webp');
+        $this->migrator->add('general.hero_banner', 'images/home/landing_hero_bg.webp');
         $this->migrator->add('general.logo_3d', 'images/LOGO_3D.webp');
         $this->migrator->add('general.logo_light', 'images/tkunity_white.webp');
         $this->migrator->add('general.logo_dark', 'images/tkunity_dark.webp');
