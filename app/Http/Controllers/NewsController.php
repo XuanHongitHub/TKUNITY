@@ -8,16 +8,22 @@ use Illuminate\View\View;
 
 class NewsController extends Controller
 {
-    public function index(): View
+    public function index(?string $categorySlug = null): View
     {
+        $category = null;
+        if ($categorySlug) {
+            $category = Category::where('slug', $categorySlug)->firstOrFail();
+        }
+
         $featuredPost = Post::query()
             ->with('category')
             ->where('status', 'published')
+            ->when($category, fn($q) => $q->where('category_id', $category->id))
             ->where('is_featured', true)
             ->orderByDesc('published_at')
             ->first();
 
-        if (! $featuredPost) {
+        if (! $featuredPost && ! $categorySlug) {
             $featuredPost = Post::query()
                 ->with('category')
                 ->where('status', 'published')
@@ -28,6 +34,7 @@ class NewsController extends Controller
         $posts = Post::query()
             ->with('category')
             ->where('status', 'published')
+            ->when($category, fn($q) => $q->where('category_id', $category->id))
             ->when($featuredPost, fn ($query) => $query->where('id', '!=', $featuredPost->id))
             ->orderByDesc('published_at')
             ->paginate(6);
@@ -61,6 +68,7 @@ class NewsController extends Controller
             'paginationLinks' => $paginationLinks,
             'categories' => $categories,
             'trendingPosts' => $trendingPosts,
+            'currentCategory' => $category,
         ]);
     }
 
@@ -72,8 +80,28 @@ class NewsController extends Controller
             ->where('status', 'published')
             ->firstOrFail();
 
+        $relatedPosts = Post::query()
+            ->with(['category'])
+            ->where('status', 'published')
+            ->where('id', '!=', $post->id)
+            ->where('category_id', $post->category_id)
+            ->take(3)
+            ->get();
+
+        if ($relatedPosts->count() < 3) {
+            $extraPosts = Post::query()
+                ->with(['category'])
+                ->where('status', 'published')
+                ->where('id', '!=', $post->id)
+                ->whereNotIn('id', $relatedPosts->pluck('id'))
+                ->take(3 - $relatedPosts->count())
+                ->get();
+            $relatedPosts = $relatedPosts->concat($extraPosts);
+        }
+
         return view('pages.news-show', [
             'post' => $post,
+            'relatedPosts' => $relatedPosts,
         ]);
     }
 }

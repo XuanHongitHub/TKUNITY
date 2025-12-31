@@ -528,7 +528,7 @@
     <section class="page-header">
         <div class="page-header-content">
             <div class="breadcrumb">
-                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('home') }}" wire:navigate>Home</a>
                 <span>/</span>
                 <span>About Us</span>
             </div>
@@ -541,7 +541,7 @@
     <section class="story-section">
         <div class="story-container">
             <div class="story-grid">
-                <div class="story-image" style="background-image: url('{{ setting_url('about_hero', 'images/home/super_hero_bg.png') }}'); background-size: cover; background-position: center;"></div>
+                <div class="story-image" style="background-image: url('{{ setting_url('about_hero', 'images/home/super_hero_bg.webp') }}'); background-size: cover; background-position: center;"></div>
                 <div class="story-content">
                     <h2>Our <span>Story</span></h2>
                     <p>TKUnity was born from a simple frustration: why should topping up games be complicated, expensive, or slow? In 2020, our founders set out to create something better.</p>
@@ -680,7 +680,7 @@
         <div class="cta-content">
             <h2>Join Our Journey</h2>
             <p>We're always looking for talented people who share our passion for gaming.</p>
-            <a href="{{ route('contact') }}" class="btn btn-outline">Get in Touch</a>
+            <a href="{{ route('contact') }}" wire:navigate class="btn btn-outline">Get in Touch</a>
         </div>
     </section>
 @endsection

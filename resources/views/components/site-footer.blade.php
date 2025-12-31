@@ -1,6 +1,6 @@
 @props([
     'siteName' => setting('site_name', 'TKUnity'),
-    'logoUrl' => setting_url('logo_light') ?? setting_url('site_logo') ?? asset('images/tkunity_white.webp'),
+    'logoUrl' => setting_url('logo_red') ?? setting_url('site_logo') ?? asset('images/tkunity_red.webp'),
 ])
 
 @php
@@ -17,12 +17,11 @@
 <footer class="site-footer">
     <div class="footer-top">
         <div class="footer-brand">
-            <a href="{{ route('home') }}" class="logo">
+            <a href="{{ route('home') }}" wire:navigate class="logo" style="display: flex; align-items: center; gap: 0.5rem; text-decoration: none;">
                 @if ($logoUrl)
-                    <img src="{{ $logoUrl }}" alt="{{ $siteName ?: 'Site Logo' }}" class="logo-img">
+                    <img src="{{ $logoUrl }}" alt="{{ $siteName ?: 'Site Logo' }}" class="logo-img" style="height: 32px; width: auto; display: block;">
                 @else
-                    <div class="logo-icon">{{ $logoInitials }}</div>
-                    <div class="logo-text">{{ strtoupper($siteName) }}</div>
+                    <span class="logo-text" style="font-weight: 700; color: #dc2626; font-size: 1.125rem;">{{ strtoupper($siteName) }}</span>
                 @endif
             </a>
         </div>
@@ -33,29 +32,40 @@
         </div>
         <div class="footer-column">
             <h4>Company</h4>
-            <a href="{{ route('about') }}">About</a>
-            <a href="{{ $careersRoute }}">Careers</a>
-            <a href="{{ route('contact') }}">Contact</a>
+            <a href="{{ route('about') }}" wire:navigate>About</a>
+            <a href="{{ $careersRoute }}" wire:navigate>Careers</a>
+            <a href="{{ route('contact') }}" wire:navigate>Contact</a>
         </div>
         <div class="footer-column">
             <h4>Community</h4>
-            <a href="#">Instagram</a>
+            @php
+                $socialLinks = setting('social_links', []);
+            @endphp
+            @if(!empty($socialLinks))
+                @foreach($socialLinks as $link)
+                    @if(!empty($link['url']))
+                        <a href="{{ $link['url'] }}" target="_blank" rel="noopener noreferrer">{{ $link['label'] ?? 'Social' }}</a>
+                    @endif
+                @endforeach
+            @else
+                <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+            @endif
         </div>
         <div class="footer-column">
             <h4>Support</h4>
-            <a href="{{ $helpRoute }}">Help Center</a>
-            <a href="{{ $termsRoute }}">Terms</a>
-            <a href="{{ $privacyRoute }}">Privacy</a>
+            <a href="{{ $helpRoute }}" wire:navigate>Help Center</a>
+            <a href="{{ $termsRoute }}" wire:navigate>Terms</a>
+            <a href="{{ $privacyRoute }}" wire:navigate>Privacy</a>
         </div>
     </div>
     <div class="footer-bottom">
-        <div class="footer-logo">
-            <span>{{ strtoupper($siteName) }}</span>
+        <div class="footer-bottom-left">
+            <img src="{{ asset('images/LOGO_ICON_TKUNITY.webp') }}" alt="{{ $siteName }}" class="footer-logo-icon">
+            <span class="copyright">© {{ $currentYear }} {{ $siteName }}. All rights reserved.</span>
         </div>
         <div class="footer-legal">
-            <span>© {{ $currentYear }} {{ $siteName }}. All rights reserved.</span>
-            <a href="{{ $privacyRoute }}">Privacy Policy</a>
-            <a href="{{ $termsRoute }}">Terms of Service</a>
+            <a href="{{ $privacyRoute }}" wire:navigate>Privacy Policy</a>
+            <a href="{{ $termsRoute }}" wire:navigate>Terms of Service</a>
         </div>
     </div>
 </footer>

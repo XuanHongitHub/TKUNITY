@@ -1030,7 +1030,7 @@
         <div class="cta-content">
             <h2>Ready to Join Us?</h2>
             <p>Don't see a role that fits? We're always looking for talented people. Reach out and let's chat.</p>
-            <a href="{{ route('contact') }}" class="btn btn-outline">Get in Touch</a>
+            <a href="{{ route('contact') }}" wire:navigate class="btn btn-outline">Get in Touch</a>
         </div>
     </section>
 

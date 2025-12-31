@@ -6,6 +6,11 @@
     <title>@yield('title', setting('seo_title', setting('site_name', 'TKUnity')))</title>
     <meta name="description" content="@yield('meta_description', setting('seo_description', setting('site_description', '')))">
     <meta name="theme-color" content="{{ setting('theme_color', '#0f0f0f') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     @if (setting('favicon'))
         <link rel="icon" href="{{ Storage::url(setting('favicon')) }}">
     @endif

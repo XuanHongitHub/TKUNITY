@@ -7,8 +7,8 @@ return new class extends SettingsMigration
     public function up(): void
     {
         if (! $this->migrator->exists('general.hero_banner')) {
-            $this->migrator->add('general.hero_banner', 'images/home/super_hero_bg.png');
-            $this->migrator->add('general.process_mockup', 'images/tkunity_devices.png');
+            $this->migrator->add('general.hero_banner', 'images/home/super_hero_bg.webp');
+            $this->migrator->add('general.process_mockup', 'images/tkunity_devices.webp');
         }
 
         if (! $this->migrator->exists('general.logo_3d')) {

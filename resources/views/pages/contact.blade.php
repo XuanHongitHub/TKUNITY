@@ -470,7 +470,7 @@
     <section class="page-header">
         <div class="page-header-content">
             <div class="breadcrumb">
-                <a href="{{ route('home') }}">Home</a>
+                <a href="{{ route('home') }}" wire:navigate>Home</a>
                 <span>/</span>
                 <span>Contact</span>
             </div>
@@ -502,7 +502,7 @@
                 <div class="info-card">
                     <h3>Help Center</h3>
                     <p>Find answers, guides, and order help.</p>
-                    <a href="{{ route('help') ?? '#' }}" class="email">Visit Help Center</a>
+                    <a href="{{ route('help') ?? '#' }}" wire:navigate class="email">Visit Help Center</a>
                 </div>
             </div>
 
@@ -565,9 +565,9 @@
                     <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
                     <p class="form-note">
                         By submitting this form, you agree to our
-                        <a href="{{ route('terms') }}">Terms of Service</a>
+                        <a href="{{ route('terms') }}" wire:navigate>Terms of Service</a>
                         and
-                        <a href="{{ route('privacy') }}">Privacy Policy</a>.
+                        <a href="{{ route('privacy') }}" wire:navigate>Privacy Policy</a>.
                     </p>
                 </form>
             </div>

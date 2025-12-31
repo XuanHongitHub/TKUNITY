@@ -116,11 +116,11 @@ body {
 }
 
 .site-nav.landing-nav.nav-scrolled {
-    background: rgba(8, 8, 8, 0.98);
+    background: rgba(8, 8, 8, 0.4);
     border-bottom: 1px solid var(--border);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 /* Logo */
@@ -134,44 +134,28 @@ body {
 }
 
 .site-nav .logo-img {
-    height: 28px;
+    height: 32px;
     width: auto;
     display: block;
-    /* Base: Always turn to Black first, then Invert to color to prevent flicker */
-    filter: brightness(0) invert(1);
-    /* ABSOLUTELY NO TRANSITION on filter to prevent intermediate color interpolation */
-    transition: none !important;
+    transition: transform 0.3s ease;
 }
 
-/* Hover/Active Toggle State: Both turn Red */
-.site-nav .logo-wrapper:hover .logo-img,
-.site-nav .logo-wrapper.active .logo-img {
-    /* Stable Red Filter starting from Black base */
-    filter: brightness(0) invert(19%) sepia(85%) saturate(7483%) hue-rotate(352deg) brightness(95%) contrast(105%);
-    transition: none !important;
+.site-nav .logo:hover .logo-img {
+    transform: scale(1.05);
 }
 
 .site-nav .logo-arrow {
     width: 14px;
     height: 14px;
-    color: white;
-    /* Instant sync with Logo */
-    transition: color 0.1s ease;
+    color: #dc2626;
+    /* Match red logo */
+    transition: transform 0.3s ease;
 }
 
 .site-nav .logo-wrapper:hover .logo-arrow,
 .site-nav .logo-wrapper.active .logo-arrow {
     color: var(--accent);
     /* Matches Logo Red */
-}
-
-/* Menu Open State: Both turn Black on White BG */
-body.nav-open .site-nav .logo-img {
-    filter: brightness(0) !important;
-}
-
-body.nav-open .site-nav .logo-arrow {
-    color: #000 !important;
 }
 
 /* Nav Links */
@@ -189,7 +173,6 @@ body.nav-open .site-nav .logo-arrow {
 
 .site-nav.landing-nav .nav-links {
     gap: 0 !important;
-    /* Ensuring gap doesn't conflict, using margin instead for consistent transform spacing */
     margin: 0 auto !important;
 }
 
@@ -396,27 +379,39 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
     border-top: 1px solid var(--border);
 }
 
-.site-footer .footer-logo span {
-    font-weight: 700;
-    font-size: 0.875rem;
-    letter-spacing: 0.1em;
+.site-footer .footer-bottom-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.site-footer .footer-logo-icon {
+    height: 16px !important;
+    width: auto;
+    opacity: 0.4;
+    display: block;
+}
+
+.site-footer .footer-bottom-left .copyright {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 0.01em;
+    opacity: 0.8;
 }
 
 .site-footer .footer-legal {
     display: flex;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: center;
-}
-
-.site-footer .footer-legal span {
-    font-size: 0.8125rem;
-    color: var(--text-dim);
 }
 
 .site-footer .footer-legal a {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 0.8125rem;
+    font-size: 0.7rem;
+    opacity: 0.8;
+    transition: all 0.2s;
 }
 
 .site-footer .footer-legal a:hover {
@@ -550,7 +545,8 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
     right: 0;
     height: auto;
     min-height: 400px;
-    background: #fff;
+    background: #0d0d0d;
+    /* Matching dark theme */
     z-index: 101;
     opacity: 0;
     visibility: hidden;
@@ -558,7 +554,8 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     padding-top: 80px;
     pointer-events: none;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .site-nav .mega-menu.active {
@@ -568,26 +565,31 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
     pointer-events: auto;
 }
 
+.site-nav .logo-wrapper.active .logo-arrow {
+    transform: rotate(180deg);
+}
+
 .site-nav .mega-menu-content {
     display: grid;
-    /* 3 text columns (Games, Support, Company) + 1 enlarged image column */
-    grid-template-columns: repeat(3, 1fr) 480px;
-    gap: 2rem;
-    padding: 3rem 4rem 4rem;
+    /* 3 category columns + 1 standard image column */
+    grid-template-columns: repeat(3, 1fr) 400px;
+    gap: 1.5rem;
+    padding: 2rem 4rem;
     max-width: 1400px;
     margin: 0 auto;
     position: relative;
+    color: #fff;
 }
 
 .site-nav .mega-menu-category h4 {
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.85rem;
+    font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #999;
-    margin-bottom: 1.5rem;
+    color: #000;
+    margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .site-nav .mega-menu-category ul {
@@ -597,16 +599,18 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
 }
 
 .site-nav .mega-menu-category li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .site-nav .mega-menu-category a {
-    color: #444;
+    color: #555;
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 0.9375rem;
+    font-weight: 400;
     display: block;
-    padding: 0.5rem 0;
+    padding: 6px 10px;
+    margin-left: -10px;
+    border-radius: 6px;
     transition: all 0.2s ease;
     position: relative;
     cursor: pointer;
@@ -614,14 +618,15 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
 
 .site-nav .mega-menu-category a:hover {
     color: var(--accent);
-    padding-left: 0.5rem;
+    background: rgba(220, 38, 38, 0.05);
+    padding-left: 14px;
 }
 
 .site-nav .mega-menu-image-col {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 16/9;
+    aspect-ratio: 16/10;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
 }
@@ -630,7 +635,8 @@ body.nav-open .site-nav.landing-nav .nav-links a:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    display: block;
+    transition: transform 0.6s ease, opacity 0.3s ease;
 }
 
 .site-nav .mega-menu-image-col:hover .mega-feat-img {

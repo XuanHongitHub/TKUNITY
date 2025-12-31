@@ -461,7 +461,7 @@
                         <button type="submit" class="submit-btn">Create Account</button>
 
                         <p class="terms-text">
-                            By signing up, you agree to our <a href="{{ route('terms') }}">Terms of Service</a> and <a href="{{ route('privacy') }}">Privacy Policy</a>
+                            By signing up, you agree to our <a href="{{ route('terms') }}" wire:navigate>Terms of Service</a> and <a href="{{ route('privacy') }}" wire:navigate>Privacy Policy</a>
                         </p>
                     </form>
                 </div>

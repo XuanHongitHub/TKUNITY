@@ -463,7 +463,14 @@
     <section class="page-header">
         <div class="page-header-content">
             <h1>News & <span>Updates</span></h1>
-            <p>Stay up to date with the latest from TKUnity - updates, promotions, and community highlights.</p>
+            @if(isset($currentCategory))
+                <p>Browsing news in <span>{{ $currentCategory->name }}</span></p>
+                <div style="margin-top: 1rem;">
+                    <a href="{{ route('news.index') }}" wire:navigate style="color: var(--accent); text-decoration: none; font-size: 0.8125rem;">← Show All News</a>
+                </div>
+            @else
+                <p>Stay up to date with the latest from TKUnity - updates, promotions, and community highlights.</p>
+            @endif
         </div>
     </section>
 
@@ -474,10 +481,11 @@
             <!-- Featured Post -->
             @if ($featuredPost)
                 @php
-                    $featuredImage = $featuredPost->getFirstMediaUrl('thumbnail');
+                    $featuredImageUrl = $featuredPost->getFirstMediaUrl('thumbnail');
+                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : '';
                 @endphp
-                <a href="{{ route('news.show', $featuredPost->slug) }}" class="featured-post">
-                    <div class="featured-post-image" @if ($featuredImage) style="background-image: url('{{ $featuredImage }}'); background-size: cover; background-position: center;" @endif>
+                <a href="{{ route('news.show', $featuredPost->slug) }}" wire:navigate class="featured-post">
+                    <div class="featured-post-image" @if ($featuredImagePath) style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;" @endif>
                         <span class="featured-badge">Featured</span>
                     </div>
                     <div class="featured-post-content">
@@ -509,12 +517,13 @@
 
             @forelse ($posts as $post)
                 @php
-                    $postImage = $post->getFirstMediaUrl('thumbnail');
+                    $postImageUrl = $post->getFirstMediaUrl('thumbnail');
+                    $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : '';
                     $content = strip_tags($post->getRawOriginal('content') ?? $post->content ?? '');
                     $readMinutes = max(1, (int) ceil(str_word_count($content) / 200));
                 @endphp
-                <a href="{{ route('news.show', $post->slug) }}" class="news-card">
-                    <div class="news-card-image" @if ($postImage) style="background-image: url('{{ $postImage }}'); background-size: cover; background-position: center;" @endif></div>
+                <a href="{{ route('news.show', $post->slug) }}" wire:navigate class="news-card">
+                    <div class="news-card-image" @if ($postImagePath) style="background-image: url('{{ $postImagePath }}'); background-size: cover; background-position: center;" @endif></div>
                     <div class="news-card-content">
                         <span class="news-card-category">{{ $post->category?->name ?? 'Updates' }}</span>
                         <h3>{{ $post->title }}</h3>
@@ -547,7 +556,7 @@
                     @endif
 
                     @foreach ($paginationLinks as $page => $url)
-                        <a href="{{ $url }}" class="pagination-btn {{ $page === $posts->currentPage() ? 'active' : '' }}">{{ $page }}</a>
+                        <a href="{{ $url }}" wire:navigate class="pagination-btn {{ $page === $posts->currentPage() ? 'active' : '' }}">{{ $page }}</a>
                     @endforeach
 
                     @if ($posts->hasMorePages())
@@ -575,7 +584,7 @@
                 <ul class="category-list">
                     @forelse ($categories as $category)
                         <li>
-                            <a href="#">
+                            <a href="{{ route('news.category', $category->slug) }}" wire:navigate class="{{ isset($currentCategory) && $currentCategory->id === $category->id ? 'active' : '' }}">
                                 <span>{{ $category->name }}</span>
                                 <span>{{ $category->posts_count }}</span>
                             </a>
@@ -590,13 +599,13 @@
             <div class="sidebar-widget">
                 <h3>Trending Now</h3>
                 @foreach ($trendingPosts as $index => $post)
-                    <div class="trending-post">
+                    <a href="{{ route('news.show', $post->slug) }}" wire:navigate class="trending-post" style="text-decoration: none; color: inherit; display: flex;">
                         <span class="trending-number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
                         <div class="trending-post-content">
                             <h4>{{ $post->title }}</h4>
                             <span>{{ optional($post->published_at)->format('M d, Y') ?? $post->created_at->format('M d, Y') }}</span>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
 

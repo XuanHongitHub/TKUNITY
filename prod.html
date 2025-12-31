@@ -1,11 +1,15 @@
-@extends('layouts.site')
-
-@section('nav_variant', 'landing')
-@section('title', setting('site_name', 'TKUnity') . ' - Where Gamers Unite')
-@section('meta_description', setting('site_description', 'Discover new worlds and compete with players worldwide.'))
-
-@section('styles')
-<style>
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKUnity - Where Gamers Unite</title>
+    <meta name="description" content="Your gateway to immersive gaming. Discover new worlds and compete with players worldwide.">
+    <meta name="theme-color" content="#dc2626">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://tkunity.com/build/assets/app-BlJlZ3ws.css" /><link rel="modulepreload" as="script" href="https://tkunity.com/build/assets/app-CAiCLEjY.js" /><link rel="stylesheet" href="https://tkunity.com/build/assets/app-BlJlZ3ws.css" data-navigate-track="reload" /><script type="module" src="https://tkunity.com/build/assets/app-CAiCLEjY.js" data-navigate-track="reload"></script>            <style>
     /* ============================================
        HOME PAGE SPECIFIC STYLES
        ============================================ */
@@ -1074,17 +1078,298 @@
         .careers-stats { gap: 2rem; }
     }
 </style>
-@endsection
+        <!-- Livewire Styles --><style >[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak] {display: none !important;}[wire\:cloak] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}</style>
+    </head>
+<body class="">
+    <nav class="site-nav landing-nav default-nav-overrides">
+        <div class="logo-wrapper" id="logoWrapper">
+            <a href="https://tkunity.com" class="logo">
+                                    <img src="https://tkunity.com/images/tkunity_white.webp" alt="TKUnity" class="logo-img">
+                            </a>
+            <svg class="logo-arrow" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path d="M7 10l5 5 5-5z" />
+            </svg>
+        </div>
+        <ul class="nav-links">
+                                                                                                            <li>
+                            <a href="https://tkunity.com" target="_self" class="active">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                                                                                <li>
+                            <a href="https://tkunity.com/about-us" target="_self" class="">
+                                <span>About Us</span>
+                            </a>
+                        </li>
+                                                                                <li>
+                            <a href="https://tkunity.com/contact" target="_self" class="">
+                                <span>Contact</span>
+                            </a>
+                        </li>
+                                                                                <li>
+                            <a href="https://tkunity.com/news" target="_self" class="">
+                                <span>News</span>
+                            </a>
+                        </li>
+                                                        </ul>
+        <div class="nav-right">
+                            <a href="https://tkunity.com/login" class="btn btn-accent">Sign In</a>
+                    </div>
 
-@section('content')
-    <section class="hero">
-        <div class="hero-image-bg" style="background-image: url('{{ setting_url('hero_banner', 'images/home/super_hero_bg.webp') }}'); background-size: cover; background-position: center;"></div>
+        <!-- Mega Menu Dropdown -->
+        <div class="mega-menu" id="megaMenu">
+            <div class="mega-menu-content">
+                                                                                        
+                            
+                                                                                                <div class="mega-menu-category">
+                                        <h4>Games</h4>
+                                        <ul>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com#games" 
+                                                       data-image="https://tkunity.com/images/LOGO_3D.webp" 
+                                                       data-caption="Topup ready">
+                                                        Game 1
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com#games" 
+                                                       data-image="https://tkunity.com/images/tkunity_red.webp" 
+                                                       data-caption="Topup ready">
+                                                        Game 2
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com#games" 
+                                                       data-image="https://tkunity.com/images/tkunity_white.webp" 
+                                                       data-caption="Topup ready">
+                                                        Game 3
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com#games" 
+                                                       data-image="https://tkunity.com/images/LOGO_3D.webp" 
+                                                       data-caption="Topup ready">
+                                                        Game 4
+                                                    </a>
+                                                </li>
+                                                                                    </ul>
+                                    </div>
+                                                                    <div class="mega-menu-category">
+                                        <h4>Support</h4>
+                                        <ul>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/help-center" 
+                                                       data-image="https://tkunity.com/images/nav/help_center_banner.png" 
+                                                       data-caption="Get Support 24/7">
+                                                        Help Center
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/faqs" 
+                                                       data-image="https://tkunity.com/images/nav/faqs_banner.png" 
+                                                       data-caption="Quick Answers">
+                                                        FAQs
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/contact" 
+                                                       data-image="https://tkunity.com/images/nav/contact_us_banner.png" 
+                                                       data-caption="We are here to help">
+                                                        Contact Us
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/terms" 
+                                                       data-image="https://tkunity.com/images/nav/terms_service_banner.png" 
+                                                       data-caption="Read our Terms">
+                                                        Terms of Service
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/privacy" 
+                                                       data-image="https://tkunity.com/images/nav/privacy_policy_banner.png" 
+                                                       data-caption="Your Privacy Matters">
+                                                        Privacy Policy
+                                                    </a>
+                                                </li>
+                                                                                    </ul>
+                                    </div>
+                                                                    <div class="mega-menu-category">
+                                        <h4>Company</h4>
+                                        <ul>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com" 
+                                                       data-image="https://tkunity.com/images/nav/home_banner_nav.png" 
+                                                       data-caption="Return to Home">
+                                                        Home
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/about-us" 
+                                                       data-image="https://tkunity.com/images/nav/about_us_banner_nav.png" 
+                                                       data-caption="Our Story">
+                                                        About Us
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/careers" 
+                                                       data-image="https://tkunity.com/images/nav/careers_banner_nav.png" 
+                                                       data-caption="Join Our Team">
+                                                        Careers
+                                                    </a>
+                                                </li>
+                                                                                            <li>
+                                                    <a href="https://tkunity.com/partners" 
+                                                       data-image="https://tkunity.com/images/nav/partners_banner_nav.png" 
+                                                       data-caption="Our Partners">
+                                                        Partners
+                                                    </a>
+                                                </li>
+                                                                                    </ul>
+                                    </div>
+                                                            
+                            
+                                                            <div class="mega-menu-image-col">
+                                    <img src="https://tkunity.com/images/nav/home_banner_nav.png" alt="Top Up Instantly" class="mega-feat-img">
+                                    <div class="mega-feat-content">
+                                        <h5>Top Up Instantly</h5>
+                                        <p>Secure payments and fast delivery for your games.</p>
+                                    </div>
+                                </div>
+                            
+                                                                                                                                                                                                                                                        </div>
+        </div>
+        <div class="menu-backdrop"></div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const logoWrapper = document.getElementById('logoWrapper');
+                const megaMenu = document.getElementById('megaMenu');
+                const nav = document.querySelector('.site-nav');
+                const isDefaultVariant = nav.classList.contains('default-nav-overrides');
+
+                let backdrop = document.querySelector('.menu-backdrop');
+                if (!backdrop) {
+                    backdrop = document.createElement('div');
+                    backdrop.className = 'menu-backdrop';
+                    document.body.appendChild(backdrop);
+                }
+
+                function toggleMenu(forceClose = false) {
+                    if (!megaMenu || !logoWrapper) return;
+                    const isActive = megaMenu.classList.contains('active');
+
+                    if (isActive || forceClose) {
+                        megaMenu.classList.remove('active');
+                        logoWrapper.classList.remove('active');
+                        backdrop.classList.remove('active');
+                        document.body.classList.remove('nav-open');
+                    } else {
+                        megaMenu.classList.add('active');
+                        logoWrapper.classList.add('active');
+                        backdrop.classList.add('active');
+                        document.body.classList.add('nav-open');
+                    }
+                }
+
+                if (logoWrapper) {
+                    logoWrapper.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleMenu();
+                    });
+                }
+
+                document.addEventListener('click', (e) => {
+                    if (logoWrapper && megaMenu && !logoWrapper.contains(e.target) && !megaMenu.contains(e.target)) {
+                        toggleMenu(true);
+                    }
+                });
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') toggleMenu(true);
+                });
+
+                if (nav) {
+                    // Initial state handling
+                    if (window.scrollY > 50) {
+                        nav.classList.add('nav-scrolled');
+                        if (isDefaultVariant) {
+                            nav.style.background = 'rgba(8, 8, 8, 0.98)';
+                            nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+                            nav.style.backdropFilter = 'blur(20px)';
+                            nav.style.webkitBackdropFilter = 'blur(20px)';
+                        }
+                    } else {
+                        nav.classList.remove('nav-scrolled');
+                        if (isDefaultVariant) {
+                            nav.style.background = 'transparent';
+                            nav.style.boxShadow = 'none';
+                            nav.style.backdropFilter = 'none';
+                            nav.style.webkitBackdropFilter = 'none';
+                            nav.style.borderBottomColor = 'transparent';
+                        }
+                    }
+
+                    window.addEventListener('scroll', () => {
+                        if (window.scrollY > 50) {
+                            nav.classList.add('nav-scrolled');
+                            if (isDefaultVariant) {
+                                nav.style.background = 'rgba(8, 8, 8, 0.98)';
+                                nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+                                nav.style.backdropFilter = 'blur(20px)';
+                                nav.style.webkitBackdropFilter = 'blur(20px)';
+                            }
+                        } else {
+                            nav.classList.remove('nav-scrolled');
+                            if (isDefaultVariant) {
+                                nav.style.background = 'transparent';
+                                nav.style.boxShadow = 'none';
+                                nav.style.backdropFilter = 'none';
+                                nav.style.webkitBackdropFilter = 'none';
+                                nav.style.borderBottomColor = 'transparent';
+                            }
+                        }
+                    });
+                }
+
+                const megaLinks = document.querySelectorAll('.mega-menu-category a[data-image]');
+                const megaImg = document.querySelector('.mega-feat-img');
+                const megaTitle = document.querySelector('.mega-feat-content h5');
+                const megaDesc = document.querySelector('.mega-feat-content p');
+
+                if (megaLinks.length > 0 && megaImg) {
+                    megaLinks.forEach(link => {
+                        link.addEventListener('mouseenter', () => {
+                            const newImage = link.getAttribute('data-image');
+                            const newCaption = link.getAttribute('data-caption');
+                            const newTitle = link.textContent;
+
+                            if (newImage) {
+                                megaImg.style.opacity = '0.8';
+                                setTimeout(() => {
+                                    megaImg.src = newImage;
+                                    megaImg.style.opacity = '1';
+                                }, 150);
+                            }
+
+                            if (megaTitle) megaTitle.textContent = newTitle;
+                            if (megaDesc) megaDesc.textContent = newCaption;
+                        });
+                    });
+                }
+            });
+        </script>
+    </nav>
+
+        <section class="hero">
+        <div class="hero-image-bg" style="background-image: url('https://tkunity.com/images/home/super_hero_bg.png'); background-size: cover; background-position: center;"></div>
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
-            <img src="{{ setting_url('logo_3d', 'images/LOGO_3D.webp') }}" alt="{{ setting('site_name', 'TKUnity') }}" class="hero-logo-3d">
+            <img src="https://tkunity.com/images/LOGO_3D.webp" alt="TKUnity" class="hero-logo-3d">
             <p class="hero-description">
-                {{ setting('site_description', 'Your gateway to immersive gaming. Discover new worlds and compete with players worldwide.') }}
+                Your gateway to immersive gaming. Discover new worlds and compete with players worldwide.
             </p>
             <div class="hero-actions">
                 <a href="#games" class="btn btn-accent">Explore Games</a>
@@ -1096,24 +1381,18 @@
     <section class="whats-happening">
         <div class="section-header">
             <h2>What's Happening</h2>
-            <a href="{{ route('news.index') }}" class="view-all">View All</a>
+            <a href="https://tkunity.com/news" class="view-all">View All</a>
         </div>
         <div class="news-grid">
-            @if ($featuredPost)
-                @php
-                    $featuredImage = $featuredPost->getFirstMediaUrl('thumbnail');
-                @endphp
-                @php
-                    $featuredImageUrl = $featuredPost->getFirstMediaUrl('thumbnail');
-                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : asset('images/home/super_hero_bg.webp');
-                @endphp
-                <a href="{{ route('news.show', $featuredPost->slug) }}" wire:navigate class="news-featured">
-                    <div class="news-featured-image" style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;">
-                        <span class="news-featured-badge">Featured</span>
+                                            <a href="https://tkunity.com/news/getting-started-with-tkunity" class="news-featured">
+                    <div class="news-featured-image"  style="background-image: url('https://tkunity.com/storage/1/super_hero_bg.png'); background-size: cover; background-position: center;" >
+                                                <span class="news-featured-badge">Featured</span>
                     </div>
                     <div class="news-featured-content">
-                        <h3>{{ $featuredPost->title }}</h3>
-                        <p>{{ \Illuminate\Support\Str::limit(strip_tags($featuredPost->getRawOriginal('content') ?? $featuredPost->content ?? ''), 140) }}</p>
+                        <h3>Getting Started with TKUnity</h3>
+                        <p>Welcome to TKUnity. This guide walks you through the quickest way to top up and manage your order from start to finish.
+
+Top Up in 4 Steps...</p>
                         <div class="news-featured-meta">
                             <span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
@@ -1122,7 +1401,7 @@
                                     <line x1="8" y1="2" x2="8" y2="6" />
                                     <line x1="3" y1="10" x2="21" y2="10" />
                                 </svg>
-                                {{ optional($featuredPost->published_at)->format('M d, Y') ?? $featuredPost->created_at->format('M d, Y') }}
+                                Dec 29, 2025
                             </span>
                             <span>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
@@ -1131,31 +1410,47 @@
                                     <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                                 </svg>
-                                {{ $featuredPost->category?->name ?? 'Updates' }}
+                                Guides
                             </span>
                         </div>
                     </div>
                 </a>
-            @endif
-
+            
             <div class="news-secondary">
-                @foreach ($latestPosts as $post)
-                    @php
-                        $postImageUrl = $post->getFirstMediaUrl('thumbnail');
-                        $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : asset('images/home/super_hero_bg.webp');
-                    @endphp
-                    <a href="{{ route('news.show', $post->slug) }}" wire:navigate class="news-card-small">
-                        <div class="news-card-small-image" style="background-image: url('{{ $postImagePath }}'); background-size: cover; background-position: center;">
-                        </div>
+                                                        <a href="https://tkunity.com/news/order-status-guide" class="news-card-small">
+                        <div class="news-card-small-image" >
+                                                            <div class="news-placeholder"></div>
+                                                    </div>
                         <div class="news-card-small-content">
-                            <span class="news-card-small-category">{{ $post->category?->name ?? 'Updates' }}</span>
-                            <h4>{{ $post->title }}</h4>
-                            <p>{{ \Illuminate\Support\Str::limit(strip_tags($post->getRawOriginal('content') ?? $post->content ?? ''), 80) }}</p>
-                            <span class="news-card-small-date">{{ optional($post->published_at)->format('M d, Y') ?? $post->created_at->format('M d, Y') }}</span>
+                            <span class="news-card-small-category">Updates</span>
+                            <h4>Order Status Guide: From Payment to Delivery</h4>
+                            <p>Track your orders with clear statuses from payment verification to delivery. If...</p>
+                            <span class="news-card-small-date">Dec 28, 2025</span>
                         </div>
                     </a>
-                @endforeach
-            </div>
+                                                        <a href="https://tkunity.com/news/supported-games-on-tkunity" class="news-card-small">
+                        <div class="news-card-small-image" >
+                                                            <div class="news-placeholder"></div>
+                                                    </div>
+                        <div class="news-card-small-content">
+                            <span class="news-card-small-category">Updates</span>
+                            <h4>Supported Games on TKUnity</h4>
+                            <p>We are steadily expanding our catalog. Currently available: Game 1, Game 2, Game...</p>
+                            <span class="news-card-small-date">Dec 26, 2025</span>
+                        </div>
+                    </a>
+                                                        <a href="https://tkunity.com/news/community-guidelines" class="news-card-small">
+                        <div class="news-card-small-image" >
+                                                            <div class="news-placeholder"></div>
+                                                    </div>
+                        <div class="news-card-small-content">
+                            <span class="news-card-small-category">Community</span>
+                            <h4>Community Guidelines</h4>
+                            <p>TKUnity is built for gamers. Please keep conversations respectful and follow our...</p>
+                            <span class="news-card-small-date">Dec 24, 2025</span>
+                        </div>
+                    </a>
+                            </div>
         </div>
     </section>
 
@@ -1258,7 +1553,7 @@
                 <a href="#" class="game-card">
                     <div class="game-card-inner">
                         <div class="game-card-visual">
-                            <div class="game-card-bg game-placeholder" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #1a0a1a 100%);">
+                            <div class="game-card-bg game-placeholder" style="background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #1a0a0a 100%);">
                                 <span class="game-placeholder-text" style="font-size: 2rem; letter-spacing: 0.2em;">GAME 4</span>
                             </div>
                             <div class="game-card-content">
@@ -1346,7 +1641,7 @@
 
             <div class="how-right">
                 <div class="device-mockups">
-                    <img src="{{ setting_url('process_mockup', 'images/tkunity_devices.webp') }}" alt="{{ setting('site_name', 'TKUnity') }} Process" class="mockup-composite">
+                    <img src="https://tkunity.com/images/tkunity_devices.png" alt="TKUnity Process" class="mockup-composite">
                 </div>
             </div>
         </div>
@@ -1507,13 +1802,53 @@
                     <span class="stat-text">Locations</span>
                 </div>
             </div>
-            <a href="{{ route('careers') }}" class="btn btn-outline">View Careers</a>
+            <a href="https://tkunity.com/careers" class="btn btn-outline">View Careers</a>
         </div>
     </section>
-@endsection
 
-@section('scripts')
-<script>
+    <footer class="site-footer">
+    <div class="footer-top">
+        <div class="footer-brand">
+            <a href="https://tkunity.com" class="logo">
+                                    <img src="https://tkunity.com/images/tkunity_white.webp" alt="TKUnity" class="logo-img">
+                            </a>
+        </div>
+        <div class="footer-column">
+            <h4>Platform</h4>
+            <a href="https://tkunity.com#games">Games</a>
+            <a href="#">Top Up</a>
+        </div>
+        <div class="footer-column">
+            <h4>Company</h4>
+            <a href="https://tkunity.com/about-us">About</a>
+            <a href="https://tkunity.com/careers">Careers</a>
+            <a href="https://tkunity.com/contact">Contact</a>
+        </div>
+        <div class="footer-column">
+            <h4>Community</h4>
+            <a href="#">Instagram</a>
+        </div>
+        <div class="footer-column">
+            <h4>Support</h4>
+            <a href="https://tkunity.com/help-center">Help Center</a>
+            <a href="https://tkunity.com/terms">Terms</a>
+            <a href="https://tkunity.com/privacy">Privacy</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="footer-logo">
+            <span>TKUNITY</span>
+        </div>
+        <div class="footer-legal">
+            <span>© 2025 TKUnity. All rights reserved.</span>
+            <a href="https://tkunity.com/privacy">Privacy Policy</a>
+            <a href="https://tkunity.com/terms">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+    <script src="/livewire/livewire.min.js?id=0f6341c0"   data-csrf="v0n1WxZw9L2lsRNb5TzVXstnZtC7X14yb6TDiZzq" data-update-uri="/livewire/update" data-navigate-once="true"></script>
+    <script>
     // FAQ Accordion
     const faqQuestions = document.querySelectorAll('.faq-question');
     faqQuestions.forEach(question => {
@@ -1701,4 +2036,6 @@
         updateSlider();
     })();
 </script>
-@endsection
+        </body>
+</html>
+

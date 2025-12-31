@@ -616,7 +616,8 @@
     <!-- Article Header -->
     @php
         $content = $post->getRawOriginal('content') ?? $post->content ?? '';
-        $featuredImage = $post->getFirstMediaUrl('thumbnail');
+        $featuredImageUrl = $post->getFirstMediaUrl('thumbnail');
+        $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : '';
         $authorName = $post->author?->name ?? setting('site_name', 'TKUnity');
         $authorInitials = \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr(preg_replace('/[^A-Za-z0-9]+/', '', $authorName), 0, 2));
         $excerpt = $post->seo_description ?: \Illuminate\Support\Str::limit(strip_tags($content), 200);
@@ -647,7 +648,7 @@
     </header>
 
     <!-- Featured Image -->
-    <div class="article-featured-image" @if ($featuredImage) style="background-image: url('{{ $featuredImage }}'); background-size: cover; background-position: center;" @endif></div>
+    <div class="article-featured-image" @if ($featuredImagePath) style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;" @endif></div>
 
     <!-- Article Content -->
     <article class="article-content">
@@ -661,12 +662,17 @@
             <div class="share-section">
                 <h3>Share this article</h3>
                 <div class="share-links">
-                    <a href="#" class="share-link" aria-label="Facebook">
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" rel="noopener noreferrer" class="share-link" aria-label="Facebook">
                         <svg viewBox="0 0 24 24" fill="currentColor">
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                     </a>
-                    <a href="#" class="share-link" aria-label="Copy Link">
+                    <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}&text={{ urlencode($post->title) }}" target="_blank" rel="noopener noreferrer" class="share-link" aria-label="X (Twitter)">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="share-link" aria-label="Copy Link" onclick="event.preventDefault(); navigator.clipboard.writeText(window.location.href); alert('Link copied to clipboard!');">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
                             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
@@ -692,37 +698,31 @@
         <div class="related-news">
             <div class="related-header">
                 <h3>Related News</h3>
-                <a href="{{ route('news.index') }}" style="color: var(--accent); text-decoration: none; font-size: 0.875rem;">View All →</a>
+                <a href="{{ route('news.index') }}" wire:navigate style="color: var(--accent); text-decoration: none; font-size: 0.875rem;">View All →</a>
             </div>
             <div class="related-grid">
-                <a href="#" class="related-card">
-                    <div class="related-card-image"></div>
-                    <span class="related-card-category">Updates</span>
-                    <h4>Supported Games on TKUnity</h4>
-                    <p>See the current catalog, including Game 1 through Game 6.</p>
-                </a>
-                <a href="#" class="related-card">
-                    <div class="related-card-image"></div>
-                    <span class="related-card-category">Community</span>
-                    <h4>Community Guidelines</h4>
-                    <p>Keep the community helpful, respectful, and safe for everyone.</p>
-                </a>
-                <a href="#" class="related-card">
-                    <div class="related-card-image"></div>
-                    <span class="related-card-category">Promotions</span>
-                    <h4>Rewards and Loyalty Overview</h4>
-                    <p>Learn how rewards work and where to find eligible offers.</p>
-                </a>
+                @foreach ($relatedPosts as $related)
+                    @php
+                        $relatedImageUrl = $related->getFirstMediaUrl('thumbnail');
+                        $relatedImagePath = $relatedImageUrl ? parse_url($relatedImageUrl, PHP_URL_PATH) : '';
+                    @endphp
+                    <a href="{{ route('news.show', $related->slug) }}" wire:navigate class="related-card">
+                        <div class="related-card-image" @if ($relatedImagePath) style="background-image: url('{{ $relatedImagePath }}'); background-size: cover; background-position: center;" @endif></div>
+                        <span class="related-card-category">{{ $related->category?->name ?? 'Updates' }}</span>
+                        <h4>{{ $related->title }}</h4>
+                        <p>{{ \Illuminate\Support\Str::limit(strip_tags($related->getRawOriginal('content') ?? $related->content ?? ''), 100) }}</p>
+                    </a>
+                @endforeach
             </div>
         </div>
     </section>
 
     <!-- Back Button -->
-    <a href="{{ route('news.index') }}" class="back-button">
+    <a href="{{ route('news.index') }}" wire:navigate class="back-button">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="15 18 9 12 15 6"/>
         </svg>
-        Back to Home
+        Back to News
     </a>
 @endsection
 

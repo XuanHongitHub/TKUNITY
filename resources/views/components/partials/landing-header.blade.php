@@ -1,5 +1,6 @@
-@php
-    $heroBannerUrl = setting_url('hero_banner', 'images/home/super_hero_bg.png');
+@php   
+   $heroBannerUrl = setting_url('hero_banner', 'images/home/super_hero_bg.webp');
+    $logoUrl = setting_url('site_logo') ?? asset('images/tkunity_red.webp');
 @endphp
 
 <nav class="landing-nav">
@@ -52,21 +53,22 @@
         }
 
         .landing-nav .logo-img {
-            height: 28px;
+            height: 32px;
             width: auto;
             display: block;
-            filter: brightness(0) invert(1);
             transition: all 0.3s ease;
             cursor: pointer;
         }
 
         .landing-nav .logo:hover .logo-img {
             transform: scale(1.05);
-            filter: brightness(0) invert(0.27) sepia(1) saturate(30) hue-rotate(350deg);
         }
 
-        .landing-nav .logo.active .logo-img {
-            filter: brightness(0) invert(0.27) sepia(1) saturate(30) hue-rotate(350deg);
+        .landing-nav .logo-arrow {
+            width: 16px;
+            height: 16px;
+            color: #dc2626; /* Match red logo */
+            transition: transform 0.3s ease;
         }
 
         .landing-nav .nav-links {
@@ -126,7 +128,7 @@
         .landing-nav .logo-arrow {
             width: 16px;
             height: 16px;
-            color: white;
+            color: #dc2626; /* Match red logo */
             transition: transform 0.3s ease;
         }
 
@@ -136,7 +138,7 @@
 
         .landing-nav .logo-wrapper.active .logo-arrow {
             transform: rotate(180deg);
-            color: var(--accent);
+            color: #dc2626;
         }
 
         .landing-nav .mega-menu {
@@ -167,21 +169,22 @@
         .landing-nav .mega-menu-content {
             display: grid;
             grid-template-columns: repeat(4, 1fr) 320px;
-            gap: 2rem;
-            padding: 3rem 4rem 4rem;
+            gap: 1.5rem;
+            padding: 2.5rem 4rem 3.5rem;
             max-width: 1400px;
             margin: 0 auto;
             position: relative;
         }
 
         .landing-nav .mega-menu-category h4 {
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-size: 0.8rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: #999;
+            color: #000;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .landing-nav .mega-menu-category ul {
@@ -195,21 +198,22 @@
         }
 
         .landing-nav .mega-menu-category a {
-            color: #444;
+            color: #555;
             text-decoration: none;
             font-size: 0.9375rem;
-            font-weight: 500;
+            font-weight: 400;
             display: block;
-            padding: 0.5rem 0;
+            padding: 6px 12px;
+            margin-left: -12px;
+            border-radius: 6px;
             transition: all 0.2s ease;
             position: relative;
-            padding-left: 0;
         }
 
         .landing-nav .mega-menu-category a:hover {
             color: var(--accent);
-            padding-left: 0.5rem;
-            background: transparent;
+            background: rgba(220, 38, 38, 0.05);
+            padding-left: 18px;
         }
 
         .landing-nav .mega-menu-image-col {
@@ -315,14 +319,14 @@
         }
     </style>
 
-    <div class="logo-wrapper" id="logoWrapper">
-        <a href="{{ route('home') }}" class="logo">
+    <div class="logo-wrapper" id="logoWrapper" style="cursor: pointer;">
+        <div class="logo">
             @if (isset($logoUrl) && $logoUrl)
                 <img src="{{ $logoUrl }}" alt="{{ $siteName ?? 'TKUnity' }}" class="logo-img">
             @else
-                <span class="logo-text">{{ $logoText ?? 'TKUnity' }}</span>
+                <span class="logo-text" style="color: #dc2626; font-weight: 700;">{{ $logoText ?? 'TKUnity' }}</span>
             @endif
-        </a>
+        </div>
         <svg class="logo-arrow" viewBox="0 0 24 24" fill="currentColor" stroke="none">
             <path d="M7 10l5 5 5-5z" />
         </svg>
@@ -359,7 +363,7 @@
                                         @foreach($column['links'] ?? [] as $link)
                                             <li>
                                                 <a href="{{ $link['url'] ?? '#' }}" 
-                                                   data-image="{{ !empty($link['image']) ? \Illuminate\Support\Facades\Storage::url($link['image']) : ($heroBannerUrl ?? '') }}" 
+                                                   data-image="{{ asset('images/home/super_hero_bg.webp') }}" 
                                                    data-caption="{{ $link['caption'] ?? '' }}">
                                                     {{ $link['label'] ?? 'Link' }}
                                                 </a>
@@ -392,7 +396,7 @@
     <div class="menu-backdrop"></div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        function initLandingHeader() {
             const logoWrapper = document.getElementById('logoWrapper');
             const megaMenu = document.getElementById('megaMenu');
 
@@ -402,6 +406,8 @@
                 backdrop.className = 'menu-backdrop';
                 document.body.appendChild(backdrop);
             }
+
+            let clickLocked = false;
 
             function toggleMenu(forceClose = false) {
                 if (!megaMenu || !logoWrapper) return;
@@ -414,6 +420,7 @@
                     backdrop.classList.remove('active');
                     document.body.classList.remove('nav-open');
                 } else {
+                    if (clickLocked) return;
                     megaMenu.classList.add('active');
                     logoWrapper.classList.add('active');
                     backdrop.classList.add('active');
@@ -422,11 +429,13 @@
             }
 
             if (logoWrapper) {
-                logoWrapper.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleMenu();
-                });
+                logoWrapper.onclick = (e) => {
+                    const isOpen = megaMenu.classList.contains('active');
+                    toggleMenu(isOpen); // toggleMenu(true) closes, toggleMenu(false) opens
+                    
+                    clickLocked = true;
+                    setTimeout(() => { clickLocked = false; }, 300);
+                };
             }
 
             document.addEventListener('click', (e) => {
@@ -477,6 +486,9 @@
                     });
                 });
             }
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', initLandingHeader);
+        document.addEventListener('livewire:navigated', initLandingHeader);
     </script>
 </nav>
