@@ -76,8 +76,16 @@
                                         <ul>
                                             @foreach($column['links'] ?? [] as $link)
                                                 <li>
+                                                    @php
+                                                        $linkImage = !empty($link['image']) ? asset($link['image']) : asset('images/home/super_hero_bg.webp');
+                                                        $linkPath = parse_url($linkImage, PHP_URL_PATH);
+                                                        // Check if file exists, if not fall back to placeholder
+                                                        if (!file_exists(public_path(urldecode($linkPath)))) {
+                                                            $linkPath = '/images/home/super_hero_bg.webp';
+                                                        }
+                                                    @endphp
                                                     <a href="{{ $link['url'] ?? '#' }}" wire:navigate
-                                                       data-image="{{ !empty($link['image']) ? parse_url(asset($link['image']), PHP_URL_PATH) : parse_url(asset('images/home/super_hero_bg.webp'), PHP_URL_PATH) }}" 
+                                                       data-image="{{ $linkPath }}" 
                                                        data-caption="{{ $link['caption'] ?? '' }}">
                                                         {{ $link['label'] ?? 'Link' }}
                                                     </a>
@@ -94,6 +102,9 @@
                                     @php
                                         $featImageUrl = asset($item['featured_image']);
                                         $featImagePath = parse_url($featImageUrl, PHP_URL_PATH);
+                                        if (!file_exists(public_path(urldecode($featImagePath)))) {
+                                            $featImagePath = '/images/home/super_hero_bg.webp';
+                                        }
                                     @endphp
                                     <img src="{{ $featImagePath }}" alt="{{ $item['featured_title'] ?? 'Featured' }}" class="mega-feat-img">
                                     <div class="mega-feat-content">
