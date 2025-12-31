@@ -43,10 +43,10 @@ class AppServiceProvider extends ServiceProvider
                         [
                             'title' => 'Games',
                             'links' => [
-                                ['label' => 'Game 1', 'url' => $homeRoute . '#games', 'image' => 'images/home/super_hero_bg.webp', 'caption' => 'Topup ready'],
-                                ['label' => 'Game 2', 'url' => $homeRoute . '#games', 'image' => 'images/home/super_hero_bg.webp', 'caption' => 'Topup ready'],
-                                ['label' => 'Game 3', 'url' => $homeRoute . '#games', 'image' => 'images/home/super_hero_bg.webp', 'caption' => 'Topup ready'],
-                                ['label' => 'Game 4', 'url' => $homeRoute . '#games', 'image' => 'images/home/super_hero_bg.webp', 'caption' => 'Topup ready'],
+                                ['label' => 'Game 1', 'url' => $gamesRoute, 'image' => 'images/home/landing_hero_bg.webp', 'caption' => 'Topup ready'],
+                                ['label' => 'Game 2', 'url' => $gamesRoute, 'image' => 'images/home/landing_hero_bg.webp', 'caption' => 'Topup ready'],
+                                ['label' => 'Game 3', 'url' => $gamesRoute, 'image' => 'images/home/landing_hero_bg.webp', 'caption' => 'Topup ready'],
+                                ['label' => 'Game 4', 'url' => $gamesRoute, 'image' => 'images/home/landing_hero_bg.webp', 'caption' => 'Topup ready'],
                             ],
                         ],
                         [

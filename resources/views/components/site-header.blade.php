@@ -77,11 +77,11 @@
                                             @foreach($column['links'] ?? [] as $link)
                                                 <li>
                                                     @php
-                                                        $linkImage = !empty($link['image']) ? asset($link['image']) : asset('images/home/super_hero_bg.webp');
+                                                        $linkImage = !empty($link['image']) ? asset($link['image']) : asset('images/home/landing_hero_bg.webp');
                                                         $linkPath = parse_url($linkImage, PHP_URL_PATH);
                                                         // Check if file exists, if not fall back to placeholder
                                                         if (!file_exists(public_path(urldecode($linkPath)))) {
-                                                            $linkPath = '/images/home/super_hero_bg.webp';
+                                                            $linkPath = '/images/home/landing_hero_bg.webp';
                                                         }
                                                     @endphp
                                                     <a href="{{ $link['url'] ?? '#' }}" wire:navigate
@@ -103,7 +103,7 @@
                                         $featImageUrl = asset($item['featured_image']);
                                         $featImagePath = parse_url($featImageUrl, PHP_URL_PATH);
                                         if (!file_exists(public_path(urldecode($featImagePath)))) {
-                                            $featImagePath = '/images/home/super_hero_bg.webp';
+                                            $featImagePath = '/images/home/landing_hero_bg.webp';
                                         }
                                     @endphp
                                     <img src="{{ $featImagePath }}" alt="{{ $item['featured_title'] ?? 'Featured' }}" class="mega-feat-img">

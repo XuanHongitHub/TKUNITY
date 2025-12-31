@@ -1106,7 +1106,7 @@
                     
                     // Fallback to generic placeholder if DB image is missing or file not found
                     if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
-                        $featuredImagePath = '/images/home/super_hero_bg.webp';
+                        $featuredImagePath = '/images/home/landing_hero_bg.webp';
                     }
                 @endphp
                 <a href="{{ route('news.show', $featuredPost->slug) }}" wire:navigate class="news-featured">
@@ -1147,7 +1147,7 @@
                         $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : null;
 
                         if (!$postImagePath || !file_exists(public_path(urldecode($postImagePath)))) {
-                            $postImagePath = '/images/home/super_hero_bg.webp';
+                            $postImagePath = '/images/home/landing_hero_bg.webp';
                         }
                     @endphp
                     <a href="{{ route('news.show', $post->slug) }}" wire:navigate class="news-card-small">

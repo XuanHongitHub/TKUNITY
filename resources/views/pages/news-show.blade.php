@@ -620,7 +620,7 @@
         $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : null;
 
         if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
-            $featuredImagePath = '/images/home/super_hero_bg.webp';
+            $featuredImagePath = '/images/home/landing_hero_bg.webp';
         }
 
         $authorName = $post->author?->name ?? setting('site_name', 'TKUnity');
@@ -712,7 +712,7 @@
                         $relatedImagePath = $relatedImageUrl ? parse_url($relatedImageUrl, PHP_URL_PATH) : null;
                         
                         if (!$relatedImagePath || !file_exists(public_path(urldecode($relatedImagePath)))) {
-                            $relatedImagePath = '/images/home/super_hero_bg.webp';
+                            $relatedImagePath = '/images/home/landing_hero_bg.webp';
                         }
                     @endphp
                     <a href="{{ route('news.show', $related->slug) }}" wire:navigate class="related-card">
