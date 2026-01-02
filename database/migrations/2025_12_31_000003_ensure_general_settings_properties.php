@@ -8,15 +8,11 @@ return new class extends SettingsMigration
     {
         // Ensure all properties in GeneralSettings exist
         if (!$this->migrator->exists('general.about_hero')) {
-            $this->migrator->add('general.about_hero', 'images/home/landing_hero_bg.webp');
-        }
-        
-        if (!$this->migrator->exists('general.process_mockup')) {
-            $this->migrator->add('general.process_mockup', 'images/tkunity_devices.webp');
+            $this->migrator->add('general.about_hero', 'images/pages/about.png');
         }
 
-        if (!$this->migrator->exists('general.logo_3d')) {
-            $this->migrator->add('general.logo_3d', 'images/LOGO_3D.webp');
+        if (!$this->migrator->exists('general.process_mockup')) {
+            $this->migrator->add('general.process_mockup', 'images/pages/unity-tech.png');
         }
 
         if (!$this->migrator->exists('general.logo_light')) {

@@ -18,6 +18,11 @@ class PostsTable
                 \Filament\Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->description(fn ($record) => \Illuminate\Support\Str::limit(strip_tags($record->content), 50)),
+                \Filament\Tables\Columns\TextColumn::make('category.name')
+                    ->label('Category')
+                    ->badge()
+                    ->color('gray')
+                    ->toggleable(),
                 \Filament\Tables\Columns\TextColumn::make('author.name')
                     ->label('Author')
                     ->sortable(),
@@ -27,6 +32,7 @@ class PostsTable
                         'draft' => 'gray',
                         'published' => 'success',
                         'scheduled' => 'warning',
+                        'archived' => 'gray',
                         default => 'gray',
                     }),
                 \Filament\Tables\Columns\TextColumn::make('published_at')

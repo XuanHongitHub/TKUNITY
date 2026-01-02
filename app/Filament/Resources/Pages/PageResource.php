@@ -20,13 +20,17 @@ class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
+    protected static ?string $navigationLabel = 'Pages';
+
+    protected static ?int $navigationSort = 4;
+
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
 
     protected static ?string $recordTitleAttribute = 'title';
 
     public static function getNavigationGroup(): ?string
     {
-        return 'Content';
+        return null;
     }
 
     public static function form(Schema $schema): Schema
@@ -41,12 +45,12 @@ class PageResource extends Resource
                                 TextInput::make('title')
                                     ->required()
                                     ->maxLength(255)
+                                    ->helperText('Visible page title used in headings and listings.')
                                     ->live(onBlur: true)
                                     ->afterStateUpdated(fn (string $operation, $state, \Filament\Forms\Set $set) => $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null),
                                 TextInput::make('slug')
-                                    ->required()
                                     ->maxLength(255)
-                                    ->unique(ignoreRecord: true),
+                                    ->helperText('Auto-generated from title if left blank. Duplicate slugs will be adjusted.'),
                             ]),
                         TextInput::make('code')
                             ->label('System Code')
@@ -54,9 +58,11 @@ class PageResource extends Resource
                             ->maxLength(255)
                             ->unique(ignoreRecord: true),
                         \Filament\Forms\Components\RichEditor::make('content')
+                            ->helperText('Primary page content displayed on the site.')
                             ->columnSpanFull(),
                         \Filament\Forms\Components\Toggle::make('is_active')
                             ->label('Visible')
+                            ->helperText('Disable to hide the page without deleting it.')
                             ->default(true),
                     ]),
             ]);

@@ -33,11 +33,12 @@ class UserForm
                             ->multiple()
                             ->preload()
                             ->searchable(),
-                        \Filament\Forms\Components\FileUpload::make('avatar_url')
+                        \Filament\Forms\Components\SpatieMediaLibraryFileUpload::make('avatar')
                             ->label('Avatar')
+                            ->collection('avatars')
                             ->image()
                             ->avatar()
-                            ->directory('avatars'),
+                            ->imageEditor(),
                     ]),
                  \Filament\Schemas\Components\Section::make('Access Control')
                     ->schema([

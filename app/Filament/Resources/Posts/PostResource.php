@@ -19,9 +19,17 @@ class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
+    protected static ?string $navigationLabel = 'News';
+
+    protected static ?string $modelLabel = 'News Article';
+
+    protected static ?string $pluralModelLabel = 'News';
+
+    protected static ?int $navigationSort = 2;
+
     public static function getNavigationGroup(): ?string
     {
-        return 'Content';
+        return null;
     }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;

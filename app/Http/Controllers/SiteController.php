@@ -83,6 +83,31 @@ class SiteController extends Controller
         return view('pages.ai-trainer');
     }
 
+    public function help(): View
+    {
+        return view('pages.help');
+    }
+
+    public function faqs(): View
+    {
+        return view('pages.faqs');
+    }
+
+    public function gamePublishing(): View
+    {
+        return view('pages.game-publishing');
+    }
+
+    public function enterpriseSolutions(): View
+    {
+        return view('pages.enterprise-solutions');
+    }
+
+    public function documentation(): View
+    {
+        return view('pages.documentation');
+    }
+
     public function terms(): View
     {
         return view('pages.terms');

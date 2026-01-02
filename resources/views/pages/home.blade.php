@@ -1,171 +1,219 @@
 @extends('layouts.app')
 
-@section('title', 'TK Unity - Professional Mobile Game & AI Development')
+@section('title', 'TK Unity - Next Gen Game Development & AI')
+@section('meta_description', 'TK UNITY - Premier game development studio and AI solutions provider based in Da Nang, Vietnam.')
 
 @section('content')
-    <!-- Hero Section -->
-    <div class="relative bg-white overflow-hidden flex-grow flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-8 items-center">
-                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
-                    <h1 class="text-4xl tracking-tight font-bold text-slate-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
-                        <span class="block">Innovation in</span>
-                        <span class="block text-brand-600">Every Pixel</span>
-                    </h1>
-                    <p class="mt-3 text-base text-slate-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl leading-relaxed">
-                        TK UNITY COMPANY LIMITED is a premier software development studio based in Da Nang. We specialize in high-performance Unity game development and advanced AI solutions for the global market.
-                    </p>
-                    <div class="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0 flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('games') }}" class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-brand-600 hover:bg-brand-700 md:py-4 md:text-lg transition-all shadow-sm">
-                            Our Games
-                        </a>
-                        <a href="{{ route('ai-trainer') }}" class="flex items-center justify-center px-8 py-3 border border-slate-300 text-base font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 md:py-4 md:text-lg transition-all">
-                            AI Solutions
-                        </a>
-                    </div>
-                </div>
-                <div class="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-                    <div class="relative mx-auto w-full rounded-2xl lg:max-w-md overflow-hidden p-2 flex items-center justify-center">
-                        <img src="{{ asset('images/home/hero_illustration.png') }}" alt="TK Unity Development Dashboard" class="w-full h-auto object-contain transform hover:scale-105 transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="{{ setting_url('home_hero_bg') ?: asset('images/home/hero.png') }}"
+                alt="{{ setting('site_name', 'TK Unity') }}">
         </div>
-    </div>
 
-    <!-- Excellence & Compliance Section -->
-    <div class="py-16 bg-slate-50 border-y border-slate-200" id="trust-compliance">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-base text-brand-600 font-semibold tracking-wide uppercase">Why Choose TK Unity</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                    Built on Integrity & Excellence
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-label">
+                    <span>{{ setting('home_hero_label', 'Architecting Virtual Worlds') }}</span>
+                </div>
+
+                <h1 class="hero-title">
+                    {!! setting('home_hero_title', 'Innovation in <span class="accent">Every Pixel</span>') !!}
+                </h1>
+
+                <p class="hero-desc">
+                    {{ setting('home_hero_subtitle', 'TK UNITY is a premier software development studio based in Da Nang. We fuse high-performance Unity game development with advanced AI solutions to create immersive digital experiences.') }}
                 </p>
-                <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
-                    We adhere to the highest standards of software development and regulatory compliance.
+
+                <div class="hero-actions">
+                    <a href="{{ setting('home_hero_cta_url', route('games')) }}"
+                        class="btn-primary">{{ setting('home_hero_cta_text', 'Explore Games') }}</a>
+                    <a href="{{ setting('home_hero_cta2_url', route('ai-trainer')) }}"
+                        class="btn-secondary">{{ setting('home_hero_cta2_text', 'AI Solutions') }}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pillars">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Why Choose TK Unity</span>
+                <h2 class="section-title">Built on Integrity & Excellence</h2>
+            </div>
+
+            <div class="pillars-grid">
+                <div class="pillar-item">
+                    <div class="pillar-number">01</div>
+                    <h3 class="pillar-title">Authentic Solutions</h3>
+                    <p class="pillar-desc">
+                        We deliver real, verifiable software products. No simulated data, no deceptive practices.
+                        Verified operational applications.
+                    </p>
+                </div>
+
+                <div class="pillar-item">
+                    <div class="pillar-number">02</div>
+                    <h3 class="pillar-title">Engineering Excellence</h3>
+                    <p class="pillar-desc">
+                        Codebases following strict industry standards for security and scalability. We prioritize clean
+                        architecture and robust performance.
+                    </p>
+                </div>
+
+                <div class="pillar-item">
+                    <div class="pillar-number">03</div>
+                    <h3 class="pillar-title">Regulatory Compliance</h3>
+                    <p class="pillar-desc">
+                        Operating with full transparency. Committed to contributing strictly to the digital economy
+                        under government regulations.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="focus">
+        <div class="container">
+            <div class="focus-grid">
+                <div class="focus-visual">
+                    <img src="{{ setting_url('home_focus_image') ?: asset('images/home/focus.png') }}"
+                        alt="{{ setting('home_focus_title', 'Game Development and AI') }}" class="focus-image">
+                    <div class="focus-badge">
+                        <div class="focus-badge-label">{{ setting('home_focus_badge_label', 'Core Architecture') }}</div>
+                        <div class="focus-badge-text">{{ setting('home_focus_badge_text', 'Dual-Engine Growth') }}</div>
+                    </div>
+                </div>
+
+                <div class="focus-content">
+                    <span class="section-label">{{ setting('home_focus_label', 'Our Focus') }}</span>
+                    <h2 class="focus-title">{!! setting('home_focus_title', 'Focused on <span class="accent">Impact</span>') !!}</h2>
+
+                    <p class="focus-intro">
+                        {{ setting('home_focus_desc', "We don't chase trends. We build substantial technology that serves a purpose. Our bifurcated focus allows us to specialize deeply in two critical areas of the modern digital landscape.") }}
+                    </p>
+
+                    <div class="focus-list">
+                        <a href="#games-section" class="focus-item">
+                            <div class="focus-icon">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="focus-item-title">Game Development</h4>
+                                <p class="focus-item-desc">
+                                    Creating immersive experiences with Unity. From concept to deployment, we build
+                                    optimized, engaging mobile games that perform across devices.
+                                </p>
+                            </div>
+                        </a>
+
+                        <a href="#ai-section" class="focus-item">
+                            <div class="focus-icon focus-icon-green">
+                                <svg viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="focus-item-title">Artificial Intelligence</h4>
+                                <p class="focus-item-desc">
+                                    Utilizing advanced algorithms to solve complex problems. Our AI solutions are
+                                    designed for accuracy, efficiency, and ethical application.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-games" id="games-section">
+        <div class="container">
+            <div class="home-section-grid">
+                <div class="home-section-content">
+                    <span class="section-label">Game Development</span>
+                    <h2 class="focus-title">{!! setting('home_section_games_title', 'Crafting Digital <span class="accent">Worlds</span>') !!}</h2>
+                    <p class="home-section-text">
+                        {{ setting('home_section_games_desc', 'We build mobile games that captivate millions. Using Unity\'s powerful engine, our team creates visually stunning, performance-optimized experiences for iOS and Android.') }}
+                    </p>
+
+                    <div class="home-features">
+                        @foreach (setting('home_section_games_features', []) as $feature)
+                            <div class="home-feature">
+                                <span class="home-feature-marker"></span>
+                                <span>{{ $feature }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <a href="{{ route('games') }}" class="btn-primary">View Our Games</a>
+                </div>
+                <div class="home-section-visual">
+                    <img src="{{ setting_url('home_section_games_image') ?: asset('images/home/games.png') }}"
+                        alt="{{ setting('home_section_games_title', 'Game Development') }}">
+                    <div class="visual-badge">
+                        <span class="visual-badge-label">{{ setting('home_section_games_badge_label', 'Engine') }}</span>
+                        <span
+                            class="visual-badge-text">{{ setting('home_section_games_badge_text', 'Unity') }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-ai" id="ai-section">
+        <div class="container">
+            <div class="home-section-grid home-section-grid-reverse">
+                <div class="home-section-visual">
+                    <img src="{{ setting_url('home_section_ai_image') ?: asset('images/home/ai-trainer.png') }}"
+                        alt="{{ setting('home_section_ai_title', 'AI Solutions') }}">
+                    <div class="visual-badge visual-badge-green">
+                        <span class="visual-badge-label">{{ setting('home_section_ai_badge_label', 'Technology') }}</span>
+                        <span
+                            class="visual-badge-text">{{ setting('home_section_ai_badge_text', 'Computer Vision') }}</span>
+                    </div>
+                </div>
+                <div class="home-section-content">
+                    <span class="section-label section-label-green">Artificial Intelligence</span>
+                    <h2 class="focus-title">{!! setting('home_section_ai_title', 'Smart Fitness <span class="accent-green">Technology</span>') !!}</h2>
+                    <p class="home-section-text">
+                        {{ setting('home_section_ai_desc', 'Our AI Personal Trainer uses advanced pose estimation and biomechanical analysis to provide real-time feedback that was previously only available to professional athletes.') }}
+                    </p>
+
+                    <div class="home-features">
+                        @foreach (setting('home_section_ai_features', []) as $feature)
+                            <div class="home-feature home-feature-green">
+                                <span class="home-feature-marker home-feature-marker-green"></span>
+                                <span>{{ $feature }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <a href="{{ route('ai-trainer') }}" class="btn-green">Explore AI Trainer</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="cta-bg"></div>
+        <div class="container">
+            <div class="cta-inner">
+                <h2 class="cta-title">{!! setting('home_cta_title', 'Technical Excellence.<br>Verified Integrity.') !!}</h2>
+                <p class="cta-desc">
+                    {{ setting('home_cta_desc', 'TK Unity adheres to strict industry standards. We provide transparent, high-performance software solutions for enterprise and government partners.') }}
                 </p>
-            </div>
-
-            <div class="mt-12 grid gap-8 grid-cols-1 md:grid-cols-3">
-                <!-- Verified Data -->
-                <div class="bg-white rounded-lg px-6 py-8 shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                     <div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-100 text-brand-600 mb-5">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-slate-900">Authentic Solutions</h3>
-                    <p class="mt-2 text-base text-slate-500">
-                        We deliver real, verifiable software products. No simulated data, no deceptive practices. Our portfolio consists of deployed, operational applications.
-                    </p>
-                </div>
-
-                <!-- Professional Standards -->
-                <div class="bg-white rounded-lg px-6 py-8 shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                     <div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-100 text-brand-600 mb-5">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-slate-900">Engineering Excellence</h3>
-                    <p class="mt-2 text-base text-slate-500">
-                        Our codebases follow strict industry standards for security, maintainability, and scalability. We prioritize clean architecture and robust performance.
-                    </p>
-                </div>
-
-                 <!-- Regulatory Compliance -->
-                 <div class="bg-white rounded-lg px-6 py-8 shadow-sm border border-slate-100 flex flex-col items-center text-center">
-                     <div class="flex items-center justify-center h-12 w-12 rounded-md bg-brand-100 text-brand-600 mb-5">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-medium text-slate-900">Regulatory Compliance</h3>
-                    <p class="mt-2 text-base text-slate-500">
-                        Operating with full transparency and legal adherence. We are committed to contributing strictly to the digital economy under government regulations.
-                    </p>
+                <div class="cta-actions">
+                    <a href="{{ setting('home_cta_btn1_url', route('contact')) }}"
+                        class="btn-white">{{ setting('home_cta_btn1_text', 'Contact Our Team') }}</a>
+                    <a href="{{ setting('home_cta_btn2_url', route('about')) }}"
+                        class="btn-outline-white">{{ setting('home_cta_btn2_text', 'About Us') }}</a>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Mission & Core Competencies -->
-    <div class="relative bg-white py-16 sm:py-24">
-        <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start">
-            <div class="relative sm:py-16 lg:py-0">
-                <div class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20">
-                    <!-- Image/Illustration -->
-                    <div class="relative rounded-2xl shadow-xl overflow-hidden border border-slate-200 bg-slate-50 aspect-[4/3] flex items-center justify-center group">
-                         <img src="{{ asset('images/home/core_pillars.png') }}" alt="Game Development and AI" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
-                         <div class="absolute bottom-0 inset-x-0 bg-white/90 backdrop-blur p-4 border-t border-slate-100">
-                             <p class="text-xs text-brand-600 uppercase tracking-widest font-bold text-center">Core Pillars</p>
-                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0">
-                <!-- Content -->
-                <div class="pt-12 sm:pt-16 lg:pt-20">
-                    <h2 class="text-3xl text-slate-900 font-extrabold tracking-tight sm:text-4xl">
-                        Focused on Impact
-                    </h2>
-                    <div class="mt-6 text-slate-500 space-y-6">
-                        <p class="text-lg">
-                            We don't chase trends. We build substantial technology that serves a purpose. Our bifurcated focus allows us to specialize deeply in two critical areas of the modern digital landscape.
-                        </p>
-                        
-                        <div class="border-t border-slate-200 pt-6">
-                            <h3 class="text-lg font-medium text-slate-900">Game Development</h3>
-                            <p class="mt-2 text-base">
-                                Creating immersive experiences with Unity. From concept to deployment, we build optimized, engaging mobile games that perform across devices.
-                            </p>
-                        </div>
-                        
-                         <div class="border-t border-slate-200 pt-6">
-                            <h3 class="text-lg font-medium text-slate-900">Artificial Intelligence</h3>
-                            <p class="mt-2 text-base">
-                                Utilizing advanced algorithms to solve complex problems. Our AI solutions are designed for accuracy, efficiency, and ethical application.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Simple Footer Call to Action -->
-    <!-- Premier Footer Call to Action -->
-    <div class="relative bg-brand-900 border-t border-brand-800">
-        <!-- Abstract Background Pattern -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-             <div class="absolute top-0 left-0 -ml-20 -mt-20 w-80 h-80 rounded-full bg-brand-800/50 blur-3xl opacity-20"></div>
-             <div class="absolute bottom-0 right-0 -mr-20 -mb-20 w-80 h-80 rounded-full bg-blue-800/50 blur-3xl opacity-20"></div>
-             <svg class="absolute inset-0 w-full h-full opacity-[0.03]" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
-                        <path d="M0 40L40 0H20L0 20M40 40V20L20 40" stroke="white" stroke-width="1" fill="none"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#grid-pattern)"/>
-            </svg>
-        </div>
-
-        <div class="relative max-w-4xl mx-auto text-center py-20 px-4 sm:px-6 lg:px-8 z-10">
-            <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl">
-                Technical Excellence. Verified Integrity.
-            </h2>
-            <p class="mt-4 text-xl text-slate-300 max-w-2xl mx-auto">
-                TK Unity adheres to strict industry standards. We provide transparent, high-performance software solutions for enterprise and government partners.
-            </p>
-            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
-                <a href="{{ route('contact') }}" class="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-lg font-medium rounded-lg text-white bg-brand-600 hover:bg-brand-700 md:text-xl transition-all shadow-lg hover:shadow-brand-500/25 ring-offset-2 focus:ring-2 ring-brand-500">
-                    Contact Our Team
-                </a>
-                 <a href="{{ route('games') }}" class="inline-flex items-center justify-center px-8 py-3.5 border border-slate-700 text-lg font-medium rounded-lg text-slate-300 bg-slate-800 hover:bg-slate-700 md:text-xl transition-all">
-                    Our Portfolio
-                </a>
-            </div>
-        </div>
-    </div>
+    </section>
 @endsection

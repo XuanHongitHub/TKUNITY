@@ -19,9 +19,15 @@ class LeadResource extends Resource
 {
     protected static ?string $model = Lead::class;
 
+    protected static ?string $navigationLabel = 'Contact Forms';
+
+    protected static ?string $modelLabel = 'Contact Request';
+
+    protected static ?int $navigationSort = 11;
+
     public static function getNavigationGroup(): ?string
     {
-        return 'Inquiries';
+        return 'Forms';
     }
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedInbox;

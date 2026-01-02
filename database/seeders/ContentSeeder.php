@@ -536,15 +536,15 @@ HTML;
 
             $imagePath = $slugImageMap[$postData['slug']] ?? null;
             
-            // Fallback to landing hero if specific image not found or not defined
+            // Fallback to hero if specific image not found or not defined
             if (!$imagePath || !file_exists(public_path($imagePath))) {
                 if ($postData['slug'] === 'getting-started-with-tkunity') {
                      // specific fallback for getting started if the flat one is missing 
-                     $imagePath = 'images/home/landing_hero_bg.webp';
+                     $imagePath = 'images/home/hero.png';
                 } else {
                      $imagePath = null; // Don't attach anything for others if no specific image, let blade handle generic fallback or attach generic here?
                      // Let's attach generic here so DB has data
-                     $imagePath = 'images/home/landing_hero_bg.webp';
+                     $imagePath = 'images/home/hero.png';
                 }
             }
 

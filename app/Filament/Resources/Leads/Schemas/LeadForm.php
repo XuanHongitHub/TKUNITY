@@ -41,13 +41,20 @@ class LeadForm
                                     ->searchable()
                                     ->preload(),
                                 \Filament\Forms\Components\TextInput::make('source')
-                                    ->placeholder('e.g. Website Contact'),
+                                    ->placeholder('e.g. Website Contact')
+                                    ->helperText('Track where this inquiry originated.'),
                             ])
                             ->columnSpan(1),
                         \Filament\Schemas\Components\Section::make('Inquiry')
                             ->schema([
-                                \Filament\Forms\Components\TextInput::make('subject')->required()->columnSpanFull(),
-                                \Filament\Forms\Components\Textarea::make('message')->required()->columnSpanFull()->rows(5),
+                                \Filament\Forms\Components\TextInput::make('subject')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->columnSpanFull(),
+                                \Filament\Forms\Components\Textarea::make('message')
+                                    ->required()
+                                    ->columnSpanFull()
+                                    ->rows(5),
                             ])
                             ->columnSpan(3),
                     ])

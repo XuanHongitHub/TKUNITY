@@ -1,10 +1,10 @@
-@extends('layouts.site')
+@extends('layouts.app')
 
 @section('title', $title . ' - ' . setting('site_name', 'TKUnity'))
 @section('meta_description', \Illuminate\Support\Str::limit(strip_tags($content ?? ''), 160))
-@section('nav_variant', 'default')
+@section('header_class', 'header-solid')
 
-@section('styles')
+@section('head')
 <style>
         /* Article Header */
         .article-header {

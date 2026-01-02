@@ -15,4 +15,12 @@ class Page extends Model
         'is_active' => 'boolean',
         'content' => 'string', // If using a block builder, otherwise 'string' if rich editor
     ];
+
+    protected static function booted(): void
+    {
+        static::saving(function (Page $page): void {
+            $source = $page->slug ?: $page->title ?: $page->code ?: 'page';
+            $page->slug = unique_slug(self::class, $source, $page->id, 'slug', 'page');
+        });
+    }
 }

@@ -14,6 +14,14 @@ class Category extends Model
         'is_visible' => 'boolean',
     ];
 
+    protected static function booted(): void
+    {
+        static::saving(function (Category $category): void {
+            $source = $category->slug ?: $category->name ?: 'category';
+            $category->slug = unique_slug(self::class, $source, $category->id, 'slug', 'category');
+        });
+    }
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');

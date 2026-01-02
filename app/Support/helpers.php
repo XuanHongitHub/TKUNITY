@@ -57,3 +57,29 @@ if (! function_exists('setting_url')) {
         return \Illuminate\Support\Facades\Storage::disk('public')->url($value);
     }
 }
+
+if (! function_exists('unique_slug')) {
+    function unique_slug(string $modelClass, string $value, ?int $ignoreId = null, string $column = 'slug', string $fallback = 'item'): string
+    {
+        $slug = \Illuminate\Support\Str::slug($value);
+
+        if ($slug === '') {
+            $slug = $fallback;
+        }
+
+        $baseQuery = $modelClass::query();
+        if ($ignoreId) {
+            $baseQuery->whereKeyNot($ignoreId);
+        }
+
+        $base = $slug;
+        $suffix = 2;
+
+        while ((clone $baseQuery)->where($column, $slug)->exists()) {
+            $slug = $base . '-' . $suffix;
+            $suffix++;
+        }
+
+        return $slug;
+    }
+}

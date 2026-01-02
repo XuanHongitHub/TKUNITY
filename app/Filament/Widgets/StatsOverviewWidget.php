@@ -13,16 +13,19 @@ class StatsOverviewWidget extends BaseStatsOverviewWidget
             Stat::make('Total Users', \App\Models\User::count())
                 ->description('Registered users')
                 ->descriptionIcon('heroicon-m-user-group')
-                ->chart([7, 2, 10, 3, 15, 4, 17])
                 ->color('success'),
-            Stat::make('New Leads', \App\Models\Lead::where('status', 'new')->count())
-                ->description('Inquiries needing attention')
-                ->descriptionIcon('heroicon-m-envelope')
-                ->color('primary'),
-            Stat::make('Published Posts', \App\Models\Post::where('status', 'published')->count())
-                ->description('Live content')
+            Stat::make('Published News', \App\Models\Post::where('status', 'published')->count())
+                ->description('Live updates')
                 ->descriptionIcon('heroicon-m-document-text')
                 ->color('info'),
+            Stat::make('Contact Requests', \App\Models\Lead::where('status', 'new')->count())
+                ->description('Needs attention')
+                ->descriptionIcon('heroicon-m-envelope')
+                ->color('primary'),
+            Stat::make('Newsletter Subscribers', \App\Models\NewsletterSubscription::where('status', 'subscribed')->count())
+                ->description('Active audience')
+                ->descriptionIcon('heroicon-m-bell')
+                ->color('warning'),
         ];
     }
 }

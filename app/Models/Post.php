@@ -31,6 +31,14 @@ class Post extends Model implements HasMedia
         'is_featured' => 'boolean',
     ];
 
+    protected static function booted(): void
+    {
+        static::saving(function (Post $post): void {
+            $source = $post->slug ?: $post->title ?: 'news';
+            $post->slug = unique_slug(self::class, $source, $post->id, 'slug', 'news');
+        });
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'author_id');
@@ -39,5 +47,10 @@ class Post extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('thumbnail')->singleFile();
     }
 }

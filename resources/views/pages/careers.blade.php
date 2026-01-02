@@ -1,9 +1,9 @@
-@extends('layouts.site')
+@extends('layouts.app')
 
 @section('title', 'Careers - ' . setting('site_name', 'TKUnity'))
-@section('nav_variant', 'default')
+@section('header_class', 'header-solid')
 
-@section('styles')
+@section('head')
 <style>
 
         /* Hero Section */
