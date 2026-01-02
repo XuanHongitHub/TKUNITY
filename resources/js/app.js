@@ -28,17 +28,21 @@ function initNavigation() {
 
     if (!header) return;
 
-    // Header Scroll Effect
-    const updateHeader = () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    };
+    if (!window.__tkunityHeaderScrollHandler) {
+        // Avoid stacking scroll listeners on Livewire navigation.
+        window.__tkunityHeaderScrollHandler = () => {
+            const activeHeader = document.getElementById('header');
+            if (!activeHeader) return;
+            if (window.scrollY > 50) {
+                activeHeader.classList.add('scrolled');
+            } else {
+                activeHeader.classList.remove('scrolled');
+            }
+        };
+        window.addEventListener('scroll', window.__tkunityHeaderScrollHandler, { passive: true });
+    }
 
-    window.addEventListener('scroll', updateHeader);
-    updateHeader(); // Initial check
+    window.__tkunityHeaderScrollHandler(); // Initial check
 
     // Mobile Menu & Mega Menu Toggle
     if (toggle && backdrop && mobileNav) {
@@ -95,7 +99,9 @@ function initNavigation() {
             });
         }
 
-        backdrop.addEventListener('click', closeNav);
+        document.querySelectorAll('[data-mobile-close]').forEach(closer => {
+            closer.addEventListener('click', closeNav);
+        });
 
         mobileNav.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeNav);
@@ -103,6 +109,13 @@ function initNavigation() {
 
         window.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && body.classList.contains('nav-open')) {
+                closeNav();
+            }
+        });
+
+        // Auto-close on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 1024 && body.classList.contains('nav-open')) {
                 closeNav();
             }
         });

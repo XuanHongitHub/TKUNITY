@@ -42,48 +42,6 @@
         $footerLogoUrl = setting_url('logo_light') ?? setting_url('site_logo') ?? $headerLogoUrl;
     @endphp
 
-    <header class="header @yield('header_class')" id="header">
-        <div class="container-wide header-inner">
-            <a href="{{ route('home') }}" wire:navigate class="logo">
-                @if ($headerLogoUrl)
-                    <img src="{{ $headerLogoUrl }}" alt="{{ $siteName }}" class="logo-image">
-                @else
-                    <div class="logo-icon">{{ $siteInitials }}</div>
-                    <span class="logo-text">{{ $siteName }}</span>
-                @endif
-            </a>
-
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li><a href="{{ route('home') }}" wire:navigate class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
-                    <li><a href="{{ route('games') }}" wire:navigate class="nav-link {{ request()->routeIs('games') ? 'active' : '' }}">Games</a></li>
-                    <li><a href="{{ route('ai-trainer') }}" wire:navigate class="nav-link {{ request()->routeIs('ai-trainer') ? 'active' : '' }}">AI Trainer</a></li>
-                    <li><a href="{{ route('about') }}" wire:navigate class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
-                </ul>
-                <a href="{{ route('contact') }}" wire:navigate class="btn-nav {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
-            </nav>
-
-            <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav" data-mobile-toggle>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
-
-    <div class="mobile-nav-backdrop" data-mobile-close></div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" aria-hidden="true">
-        <div class="mobile-nav-inner">
-            <a href="{{ route('home') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
-            <a href="{{ route('games') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('games') ? 'active' : '' }}">Games</a>
-            <a href="{{ route('ai-trainer') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('ai-trainer') ? 'active' : '' }}">AI Trainer</a>
-            <a href="{{ route('about') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About</a>
-        </div>
-        <div class="mobile-nav-actions">
-            <a href="{{ route('contact') }}" wire:navigate class="btn-nav {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
-        </div>
-    </nav>
-
     <main>
         @yield('content')
     </main>
@@ -189,6 +147,85 @@
             </div>
         </div>
     </footer>
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <a href="{{ route('home') }}" class="mobile-logo">
+                @if ($headerLogoUrl)
+                    <img src="{{ $headerLogoUrl }}" alt="{{ $siteName }}" class="logo-image">
+                @else
+                    <div class="logo-icon">{{ $siteInitials }}</div>
+                @endif
+            </a>
+            <button class="mobile-close-btn" aria-label="Close Menu" data-mobile-close>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="mobile-nav-content">
+            <div class="mobile-nav-links">
+                <a href="{{ route('home') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" style="--delay: 1">
+                    <span class="link-number">01</span>
+                    <span class="link-text">Home</span>
+                </a>
+                <a href="{{ route('games') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('games') ? 'active' : '' }}" style="--delay: 2">
+                    <span class="link-number">02</span>
+                    <span class="link-text">Games</span>
+                </a>
+                <a href="{{ route('ai-trainer') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('ai-trainer') ? 'active' : '' }}" style="--delay: 3">
+                    <span class="link-number">03</span>
+                    <span class="link-text">AI Trainer</span>
+                </a>
+                <a href="{{ route('about') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('about') ? 'active' : '' }}" style="--delay: 4">
+                    <span class="link-number">04</span>
+                    <span class="link-text">About</span>
+                </a>
+                <a href="{{ route('contact') }}" wire:navigate class="mobile-nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" style="--delay: 5">
+                    <span class="link-number">05</span>
+                    <span class="link-text">Contact</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="mobile-nav-footer">
+            <div class="mobile-nav-contact">
+                <a href="mailto:{{ setting('contact_email', 'tkunity@support.com') }}">{{ setting('contact_email', 'tkunity@support.com') }}</a>
+            </div>
+            <div class="mobile-nav-tag">TK UNITY COMPANY LIMITED</div>
+        </div>
+    </nav>
+
+    <header class="header @yield('header_class')" id="header">
+        <div class="container-wide header-inner">
+            <a href="{{ route('home') }}" wire:navigate class="logo" id="logoWrapper">
+                @if ($headerLogoUrl)
+                    <img src="{{ $headerLogoUrl }}" alt="{{ $siteName }}" class="logo-image">
+                @else
+                    <div class="logo-icon">{{ $siteInitials }}</div>
+                    <span class="logo-text">{{ $siteName }}</span>
+                @endif
+            </a>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="{{ route('home') }}" wire:navigate class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
+                    <li><a href="{{ route('games') }}" wire:navigate class="nav-link {{ request()->routeIs('games') ? 'active' : '' }}">Games</a></li>
+                    <li><a href="{{ route('ai-trainer') }}" wire:navigate class="nav-link {{ request()->routeIs('ai-trainer') ? 'active' : '' }}">AI Trainer</a></li>
+                    <li><a href="{{ route('about') }}" wire:navigate class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
+                </ul>
+                <a href="{{ route('contact') }}" wire:navigate class="btn-nav {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
+            </nav>
+
+            <button class="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav" data-mobile-toggle>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="butt" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <path d="M3 6h18M7 18h14" />
+                </svg>
+            </button>
+        </div>
+    </header>
 
     @livewireScripts
     @yield('scripts')
