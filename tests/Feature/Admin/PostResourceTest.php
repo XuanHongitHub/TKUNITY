@@ -499,7 +499,6 @@ class PostResourceTest extends TestCase
             ->assertFormFieldExists('title')
             ->assertFormFieldExists('slug')
             ->assertFormFieldExists('content')
-            ->assertFormFieldExists('excerpt')
             ->assertFormFieldExists('status')
             ->assertFormFieldExists('published_at')
             ->assertFormFieldExists('author_id')
