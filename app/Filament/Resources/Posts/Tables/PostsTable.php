@@ -14,7 +14,9 @@ class PostsTable
         return $table
             ->columns([
                 \Filament\Tables\Columns\SpatieMediaLibraryImageColumn::make('thumbnail')
-                    ->collection('thumbnail'),
+                    ->collection('thumbnail')
+                    ->circular()
+                    ->size(60),
                 \Filament\Tables\Columns\TextColumn::make('title')
                     ->searchable()
                     ->description(fn ($record) => \Illuminate\Support\Str::limit(strip_tags($record->content), 50)),

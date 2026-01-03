@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\NewsletterSubscriptions;
 
-use App\Filament\Resources\NewsletterSubscriptions\Pages\CreateNewsletterSubscription;
 use App\Filament\Resources\NewsletterSubscriptions\Pages\EditNewsletterSubscription;
 use App\Filament\Resources\NewsletterSubscriptions\Pages\ListNewsletterSubscriptions;
 use App\Filament\Resources\NewsletterSubscriptions\Schemas\NewsletterSubscriptionForm;
@@ -45,7 +44,6 @@ class NewsletterSubscriptionResource extends Resource
     {
         return [
             'index' => ListNewsletterSubscriptions::route('/'),
-            'create' => CreateNewsletterSubscription::route('/create'),
             'edit' => EditNewsletterSubscription::route('/{record}/edit'),
         ];
     }

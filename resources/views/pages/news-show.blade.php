@@ -13,12 +13,6 @@
     <!-- Article Header -->
     @php
         $content = $post->getRawOriginal('content') ?? $post->content ?? '';
-        $featuredImageUrl = $post->getFirstMediaUrl('thumbnail');
-        $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : null;
-
-        if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
-            $featuredImagePath = '/images/home/hero.png';
-        }
 
         $authorName = $post->author?->name ?? setting('site_name', 'TKUnity');
         $authorInitials = \Illuminate\Support\Str::upper(\Illuminate\Support\Str::substr(preg_replace('/[^A-Za-z0-9]+/', '', $authorName), 0, 2));
@@ -50,7 +44,7 @@
     </header>
 
     <!-- Featured Image -->
-    <div class="article-featured-image" @if ($featuredImagePath) style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;" @endif></div>
+    <div class="article-featured-image" style="background-image: url('{{ media_url($post, 'thumbnail', 'images/home/hero.png') }}'); background-size: cover; background-position: center;"></div>
 
     <!-- Article Content -->
     <article class="article-content">
@@ -104,16 +98,8 @@
             </div>
             <div class="related-grid">
                 @foreach ($relatedPosts as $related)
-                    @php
-                        $relatedImageUrl = $related->getFirstMediaUrl('thumbnail');
-                        $relatedImagePath = $relatedImageUrl ? parse_url($relatedImageUrl, PHP_URL_PATH) : null;
-                        
-                        if (!$relatedImagePath || !file_exists(public_path(urldecode($relatedImagePath)))) {
-                            $relatedImagePath = '/images/home/hero.png';
-                        }
-                    @endphp
                     <a href="{{ route('news.show', $related->slug) }}" wire:navigate class="related-card">
-                        <div class="related-card-image" @if ($relatedImagePath) style="background-image: url('{{ $relatedImagePath }}'); background-size: cover; background-position: center;" @endif></div>
+                        <div class="related-card-image" style="background-image: url('{{ media_url($related, 'thumbnail', 'images/home/hero.png') }}'); background-size: cover; background-position: center;"></div>
                         <span class="related-card-category">{{ $related->category?->name ?? 'Updates' }}</span>
                         <h4>{{ $related->title }}</h4>
                         <p>{{ \Illuminate\Support\Str::limit(strip_tags($related->getRawOriginal('content') ?? $related->content ?? ''), 100) }}</p>

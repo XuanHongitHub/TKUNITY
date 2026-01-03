@@ -51,6 +51,24 @@ class Post extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('thumbnail')->singleFile();
+        $this->addMediaCollection('thumbnail')
+            ->singleFile()
+            ->registerMediaConversions(function () {
+                $this
+                    ->addMediaConversion('thumb')
+                    ->width(400)
+                    ->height(300)
+                    ->sharpen(10)
+                    ->optimize()
+                    ->performOnCollections('thumbnail');
+
+                $this
+                    ->addMediaConversion('card')
+                    ->width(800)
+                    ->height(600)
+                    ->sharpen(10)
+                    ->optimize()
+                    ->performOnCollections('thumbnail');
+            });
     }
 }

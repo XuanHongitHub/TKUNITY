@@ -31,16 +31,9 @@
         <section class="news-main">
             <!-- Featured Post -->
             @if ($featuredPost)
-                @php
-                    $featuredImageUrl = $featuredPost->getFirstMediaUrl('thumbnail');
-                    $featuredImagePath = $featuredImageUrl ? parse_url($featuredImageUrl, PHP_URL_PATH) : null;
 
-                    if (!$featuredImagePath || !file_exists(public_path(urldecode($featuredImagePath)))) {
-                        $featuredImagePath = '/images/home/hero.png';
-                    }
-                @endphp
                 <a href="{{ route('news.show', $featuredPost->slug) }}" wire:navigate class="featured-post">
-                    <div class="featured-post-image" @if ($featuredImagePath) style="background-image: url('{{ $featuredImagePath }}'); background-size: cover; background-position: center;" @endif>
+                    <div class="featured-post-image" style="background-image: url('{{ media_url($featuredPost, 'thumbnail', 'images/home/hero.png') }}'); background-size: cover; background-position: center;">
                         <span class="featured-badge">Featured</span>
                     </div>
                     <div class="featured-post-content">
@@ -72,18 +65,12 @@
 
             @forelse ($posts as $post)
                 @php
-                    $postImageUrl = $post->getFirstMediaUrl('thumbnail');
-                    $postImagePath = $postImageUrl ? parse_url($postImageUrl, PHP_URL_PATH) : null;
-                    
-                    if (!$postImagePath || !file_exists(public_path(urldecode($postImagePath)))) {
-                        $postImagePath = '/images/home/hero.png';
-                    }
 
                     $content = strip_tags($post->getRawOriginal('content') ?? $post->content ?? '');
                     $readMinutes = max(1, (int) ceil(str_word_count($content) / 200));
                 @endphp
                 <a href="{{ route('news.show', $post->slug) }}" wire:navigate class="news-card">
-                    <div class="news-card-image" @if ($postImagePath) style="background-image: url('{{ $postImagePath }}'); background-size: cover; background-position: center;" @endif></div>
+                    <div class="news-card-image" style="background-image: url('{{ media_url($post, 'thumbnail', 'images/home/hero.png') }}'); background-size: cover; background-position: center;"></div>
                     <div class="news-card-content">
                         <span class="news-card-category">{{ $post->category?->name ?? 'Updates' }}</span>
                         <h3>{{ $post->title }}</h3>
@@ -179,21 +166,7 @@
                 </form>
             </div>
 
-            <!-- Tags -->
-            <div class="sidebar-widget">
-                <h3>Popular Tags</h3>
-                <div class="tags-cloud">
-                    <a href="#" class="tag">update</a>
-                    <a href="#" class="tag">topup</a>
-                    <a href="#" class="tag">rewards</a>
-                    <a href="#" class="tag">promotions</a>
-                    <a href="#" class="tag">community</a>
-                    <a href="#" class="tag">maintenance</a>
-                    <a href="#" class="tag">support</a>
-                    <a href="#" class="tag">payments</a>
-                    <a href="#" class="tag">guides</a>
-                </div>
-            </div>
+
         </aside>
     </div>
 @endsection

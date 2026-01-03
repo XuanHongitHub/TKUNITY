@@ -22,5 +22,14 @@ class Page extends Model
             $source = $page->slug ?: $page->title ?: $page->code ?: 'page';
             $page->slug = unique_slug(self::class, $source, $page->id, 'slug', 'page');
         });
+
+        // Prevent deletion of important pages
+        static::deleting(function (Page $page): bool {
+            // Pages with 'code' are system pages and cannot be deleted
+            if ($page->code) {
+                throw new \Exception("Cannot delete system page: {$page->title}. This page is protected.");
+            }
+            return true;
+        });
     }
 }

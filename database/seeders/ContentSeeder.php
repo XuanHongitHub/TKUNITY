@@ -361,24 +361,6 @@ HTML;
                 'code' => 'privacy',
                 'content' => $privacyContent,
             ],
-            [
-                'title' => 'About Us',
-                'slug' => 'about-us',
-                'code' => null,
-                'content' => $aboutContent,
-            ],
-            [
-                'title' => 'Careers',
-                'slug' => 'careers',
-                'code' => null,
-                'content' => $careersContent,
-            ],
-            [
-                'title' => 'Contact',
-                'slug' => 'contact',
-                'code' => null,
-                'content' => $contactContent,
-            ],
         ];
 
         foreach ($pages as $page) {
@@ -511,6 +493,9 @@ HTML;
                 ]
             );
 
+            // Clear existing thumbnails to allow re-seeding with new images
+            $post->clearMediaCollection('thumbnail');
+
             // Tags temporarily disabled due to Spatie Tags complexity
             // TODO: Re-enable tags with proper format
             /*
@@ -526,30 +511,23 @@ HTML;
             }
             */
 
-            // Image attachment logic
+            // Image attachment logic - use existing images from public folder
+            // Map each post to a specific image for visual variety
             $slugImageMap = [
-                'getting-started-with-tkunity' => 'images/news/flat/getting-started.png',
-                'order-status-guide' => 'images/news/flat/order-status.png',
-                'supported-games-on-tkunity' => 'images/news/flat/supported-games.png',
-                'community-guidelines' => 'images/news/flat/community.png',
+                'getting-started-with-tkunity' => 'images/home/hero_illustration.png',
+                'order-status-guide' => 'images/home/focus.png',
+                'supported-games-on-tkunity' => 'images/home/games.png',
+                'community-guidelines' => 'images/home/core_pillars.png',
+                'rewards-and-loyalty-overview' => 'images/home/game_section.png',
+                'service-status-and-maintenance' => 'images/home/ai_section.png',
             ];
 
-            $imagePath = $slugImageMap[$postData['slug']] ?? null;
-            
-            // Fallback to hero if specific image not found or not defined
-            if (!$imagePath || !file_exists(public_path($imagePath))) {
-                if ($postData['slug'] === 'getting-started-with-tkunity') {
-                     // specific fallback for getting started if the flat one is missing 
-                     $imagePath = 'images/home/hero.png';
-                } else {
-                     $imagePath = null; // Don't attach anything for others if no specific image, let blade handle generic fallback or attach generic here?
-                     // Let's attach generic here so DB has data
-                     $imagePath = 'images/home/hero.png';
-                }
-            }
+            // Attach thumbnail image - use mapped image or default
+            $imagePath = $slugImageMap[$postData['slug']] ?? 'images/home/hero_illustration.png';
+            $fullPath = public_path($imagePath);
 
-            if ($imagePath && file_exists(public_path($imagePath)) && $post->getMedia('thumbnail')->isEmpty()) {
-                $post->addMedia(public_path($imagePath))
+            if (file_exists($fullPath)) {
+                $post->addMedia($fullPath)
                     ->preservingOriginal()
                     ->toMediaCollection('thumbnail');
             }
