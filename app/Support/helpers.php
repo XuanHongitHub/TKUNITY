@@ -83,3 +83,28 @@ if (! function_exists('unique_slug')) {
         return $slug;
     }
 }
+
+if (! function_exists('media_url')) {
+    /**
+     * Get media URL from a model with Spatie Media Library
+     *
+     * @param mixed $model Model with HasMedia trait
+     * @param string $collection Media collection name
+     * @param string|null $fallback Fallback image path
+     * @return string|null
+     */
+    function media_url($model, string $collection = 'default', ?string $fallback = null): ?string
+    {
+        if (! $model) {
+            return $fallback ? asset($fallback) : null;
+        }
+
+        $media = $model->getFirstMedia($collection);
+
+        if ($media) {
+            return $media->getUrl();
+        }
+
+        return $fallback ? asset($fallback) : null;
+    }
+}
